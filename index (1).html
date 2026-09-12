@@ -1,0 +1,1698 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compound Race V2 — Road to Rp1 Miliar</title>
+<meta name="description" content="Simulasi hidup, karier, bisnis, utang, investasi, dan keputusan uang menuju Rp1 miliar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--asphalt:#1E2A32;--panel:#27363F;--panel-2:#2F414C;--line:#3B4F5B;--bone:#EDE6D6;--dim:#A9B0AF;--amber:#F5B841;--signal:#E4572E;--flag:#58B368;--blue:#71A8D9;--r:9px}
+*{box-sizing:border-box;margin:0;padding:0}html,body{background:var(--asphalt);color:var(--bone);font-family:Manrope,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}input,select{font:inherit;color:inherit}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--amber);outline-offset:2px}.wrap{max-width:680px;margin:0 auto;padding:14px 14px 54px}.muted{color:var(--dim)}.up{color:var(--flag)}.down{color:var(--signal)}.amber{color:var(--amber)}.blue{color:var(--blue)}h1{font-weight:800;letter-spacing:-.025em;line-height:1.05}h2{font-weight:800;font-size:1.08rem;letter-spacing:-.01em}.primary{width:100%;background:var(--amber);color:#1E2A32;font-weight:800;font-size:1rem;padding:14px;border-radius:var(--r)}.primary:active{transform:translateY(1px)}.primary:disabled,.chip:disabled{opacity:.4}.ghost{width:100%;padding:11px;border-radius:var(--r);border:1px solid var(--line);color:var(--dim);font-weight:650;margin-top:8px}.chip{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-weight:700;font-size:.84rem}.chip:hover{border-color:var(--amber)}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}.q{position:relative;display:inline-block;width:17px;height:17px;border-radius:50%;border:1px solid var(--dim);color:var(--dim);font-size:.68rem;line-height:15px;text-align:center;margin-left:4px;vertical-align:2px;font-weight:800}.chat{display:flex;flex-direction:column;gap:10px;padding-top:10px}.bub{max-width:90%;padding:12px 14px;border-radius:14px;line-height:1.48;font-size:.96rem}.bub.me{align-self:flex-start;background:var(--panel);border-bottom-left-radius:4px}.bub.you{align-self:flex-end;background:var(--amber);color:#1E2A32;font-weight:750;border-bottom-right-radius:4px}.inp{display:flex;gap:8px;margin-top:7px}.inp input,.inp select{flex:1;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:12px 13px;min-width:0}.inp button{background:var(--amber);color:#1E2A32;font-weight:800;padding:0 17px;border-radius:var(--r)}.reveal{background:var(--panel);border-radius:12px;padding:17px 15px;margin-top:10px;border-left:4px solid var(--amber)}.reveal .big{font-size:2rem;font-weight:800;letter-spacing:-.035em;margin:3px 0}.consent{display:flex;gap:9px;align-items:flex-start;font-size:.78rem;color:var(--dim);line-height:1.42;margin:12px 0 9px}.consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--amber)}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.top .age{font-size:1.7rem;font-weight:800;letter-spacing:-.03em}.top .age small{font-size:.82rem;font-weight:600;color:var(--dim);margin-left:5px}.track{height:11px;background:var(--panel);border-radius:999px;overflow:hidden;position:relative}.track i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),#FFD579);transition:width .35s}.goalrow{display:flex;justify-content:space-between;gap:12px;margin:7px 0 0;font-size:.78rem;color:var(--dim)}.hero{margin:15px 0 8px}.hero .label{font-size:.82rem;color:var(--dim)}.hero .nw{font-size:2.55rem;font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-top:2px}.hero .sub{margin-top:5px;font-size:.88rem}.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin:11px 0}.scoregrid>div{background:var(--panel);padding:10px}.scoregrid .k{font-size:.69rem;color:var(--dim);line-height:1.3}.scoregrid .v{font-size:1.03rem;font-weight:800;margin-top:3px}.coach{background:var(--panel);border-left:4px solid var(--amber);border-radius:var(--r);padding:12px 13px;line-height:1.48;margin:11px 0;font-size:.9rem}.panel{background:var(--panel);border-radius:var(--r);padding:12px 13px;margin:9px 0}.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}.panelhead small{font-size:.72rem;color:var(--dim)}.flow table{width:100%;border-collapse:collapse}.flow td{padding:3px 0;font-size:.87rem}.flow td:last-child{text-align:right;font-weight:700}.flow tr.total td{border-top:1px solid var(--line);padding-top:7px;font-weight:800}.breakdown{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:.82rem}.breakdown b{text-align:right}.runbuttons{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}.runbuttons button{background:var(--panel-2);border:1px solid var(--line);border-radius:7px;padding:11px 4px;font-size:.79rem;font-weight:800}.runbuttons button:first-child{background:var(--amber);color:var(--asphalt);border-color:var(--amber)}.lastRun{font-size:.82rem;background:rgba(88,179,104,.08);border:1px solid rgba(88,179,104,.3);border-radius:8px;padding:9px 11px;margin:7px 0}.sectionTitle{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin:14px 0 8px}.sectionTitle span{font-size:.73rem;color:var(--dim);font-weight:600}.presets{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:7px}.presets button{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:8px 3px;font-size:.72rem;font-weight:750}.presets button.on{border-color:var(--amber);color:var(--amber)}.arow{background:var(--panel);border-radius:var(--r);padding:10px 12px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-left:4px solid var(--line)}.arow.hot{border-left-color:var(--amber)}.arow .n{font-weight:750;font-size:.91rem}.arow .d{font-size:.74rem;color:var(--dim);margin-top:2px;line-height:1.38}.arow .v{font-size:.76rem;margin-top:4px}.step{display:flex;align-items:center;gap:2px}.step button{width:33px;height:33px;border-radius:6px;background:var(--panel-2);border:1px solid var(--line);font-weight:800}.step b{width:40px;text-align:center;font-size:.88rem}.cashrow{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--panel-2);border-radius:var(--r);padding:9px 11px;margin:7px 0 10px;font-size:.84rem}.cashrow button{background:var(--amber);color:#1E2A32;font-weight:800;padding:7px 10px;border-radius:6px;font-size:.77rem}.course,.biz{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;margin-bottom:7px}.course .row,.biz .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.course .name,.biz .name{font-weight:800;font-size:.9rem}.course .desc,.biz .desc{font-size:.74rem;color:var(--dim);line-height:1.42;margin-top:3px}.course .meta,.biz .meta{font-size:.74rem;margin-top:6px}.course button,.biz button{white-space:nowrap;background:var(--panel-2);border:1px solid var(--line);padding:7px 9px;border-radius:6px;font-weight:750;font-size:.74rem}.skilltags{display:flex;gap:5px;flex-wrap:wrap}.tagpill{font-size:.7rem;padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--dim)}.tagpill.got{border-color:var(--flag);color:var(--bone)}.debtcard{background:rgba(228,87,46,.07);border:1px solid rgba(228,87,46,.35);border-radius:8px;padding:9px 10px;margin-top:6px;font-size:.79rem}.badges{display:flex;gap:5px;flex-wrap:wrap;margin:11px 0}.badge{font-size:.7rem;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 9px;color:var(--dim)}.badge.got{border-color:var(--flag);color:var(--bone)}.log{margin-top:13px;font-size:.78rem;color:var(--dim);line-height:1.48}.log div{padding:6px 0;border-top:1px dashed var(--line)}.log b{color:var(--bone)}canvas{width:100%;height:180px;display:block;margin-top:9px}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.69rem;color:var(--dim);margin-top:3px}.legend i{display:inline-block;width:13px;height:3px;vertical-align:middle;margin-right:4px;border-radius:2px}.overlay{position:fixed;inset:0;background:rgba(14,20,25,.84);display:flex;align-items:flex-end;justify-content:center;z-index:9}.modal{background:var(--panel);width:100%;max-width:590px;border-radius:14px 14px 0 0;padding:19px 17px 25px;max-height:92vh;overflow:auto}.modal .tag{font-size:.75rem;font-weight:750;color:var(--amber);margin-bottom:5px}.modal .tag.bad{color:var(--signal)}.modal .tag.good{color:var(--flag)}.modal h2{font-size:1.25rem;margin-bottom:7px}.modal p{line-height:1.5;margin-bottom:9px;font-size:.91rem}.modal .eff{font-size:.79rem;color:var(--dim)}.choice{display:block;width:100%;text-align:left;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:11px 13px;margin-top:7px}.choice b{display:block}.choice span{display:block;font-size:.76rem;color:var(--dim);margin-top:2px;line-height:1.4}.choice:disabled{opacity:.38}.pop{animation:pop .3s ease-out}@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}#toast{position:fixed;left:50%;top:14px;transform:translateX(-50%);background:var(--bone);color:var(--asphalt);padding:9px 14px;border-radius:8px;font-weight:750;font-size:.82rem;z-index:20;max-width:92vw;display:none}.end .verdict{font-size:2.35rem;font-weight:800;letter-spacing:-.04em;line-height:1.06;margin:5px 0}.end .verdict.owner{color:var(--amber)}.end .verdict.ruin{color:var(--signal)}.endtable{width:100%;border-collapse:collapse;background:var(--panel);border-radius:var(--r);overflow:hidden;margin:12px 0}.endtable td{padding:8px 11px;border-bottom:1px solid var(--line);font-size:.86rem}.endtable tr:last-child td{border-bottom:0}.endtable td:last-child{text-align:right;font-weight:800}@media(min-width:600px){.overlay{align-items:center;padding:20px}.modal{border-radius:14px}}@media(max-width:450px){.scoregrid{grid-template-columns:repeat(2,1fr)}.runbuttons{grid-template-columns:repeat(2,1fr)}.presets{grid-template-columns:repeat(2,1fr)}}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div><div id="toast"></div>
+<script>
+const CONFIG = {
+  brand: 'Deprojekt Studio',
+  endpoint: '',
+  waNumber: '',
+  adminKey: 'race'
+};
+const $ = s => document.querySelector(s);
+const JT = 1e6,
+  M = 1e9,
+  MAX_MONTHS = 360,
+  FREEDOM_RATE = .0033;
+const rp = n => {
+  n = Number(n) || 0;
+  const a = Math.abs(n);
+  let s;
+  if (a >= 1e12) s = (a / 1e12).toLocaleString('id-ID', {
+    maximumFractionDigits: 2
+  }) + ' T';
+  else if (a >= M) s = (a / M).toLocaleString('id-ID', {
+    maximumFractionDigits: 2
+  }) + ' M';
+  else if (a >= JT) s = (a / JT).toLocaleString('id-ID', {
+    maximumFractionDigits: a < 10 * JT ? 1 : 0
+  }) + ' jt';
+  else s = Math.round(a / 1e3).toLocaleString('id-ID') + ' rb';
+  return (n < 0 ? '−' : '') + 'Rp' + s
+};
+const pct = n => (n * 100).toLocaleString('id-ID', {
+  maximumFractionDigits: 1
+}) + '%';
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const rand = (a, b) => a + Math.random() * (b - a);
+const randn = () => {
+  let u = 0,
+    v = 0;
+  while (!u) u = Math.random();
+  while (!v) v = Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v)
+};
+const store = {
+  get(k) {
+    try {
+      return JSON.parse(localStorage.getItem(k))
+    } catch (e) {
+      return null
+    }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem(k, JSON.stringify(v))
+    } catch (e) {}
+  },
+  del(k) {
+    try {
+      localStorage.removeItem(k)
+    } catch (e) {}
+  }
+};
+const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+const parseRp = s => {
+  s = String(s).toLowerCase().replace(/rp|\s/g, '').replace(/\./g, '').replace(',', '.');
+  let m = 1;
+  if (/jt|juta/.test(s)) m = JT;
+  else if (/m$|miliar|milyar/.test(s)) m = M;
+  else if (/rb|ribu|k$/.test(s)) m = 1e3;
+  const n = parseFloat(s.replace(/[^\d.]/g, ''));
+  if (isNaN(n)) return null;
+  let v = n * m;
+  if (m === 1 && v < 1000) v *= JT;
+  return v
+};
+const AN = {
+  send(type, data = {}) {
+    const e = {
+      t: Date.now(),
+      type,
+      ...data,
+      sid: S ? S.sid : null
+    };
+    const all = store.get('cr2-events') || [];
+    all.push(e);
+    store.set('cr2-events', all.slice(-3000));
+    if (CONFIG.endpoint) {
+      try {
+        fetch(CONFIG.endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain'
+          },
+          body: JSON.stringify(e)
+        })
+      } catch (x) {}
+    }
+  }
+};
+const track = (t, d = {}) => AN.send(t, d);
+const G = {
+  spend: ['Spending rate', 'Berapa persen penghasilan bulanan habis untuk living cost + cicilan. Makin dekat 100%, makin sedikit ruang untuk membangun aset.'],
+  save: ['Saving rate', 'Sisa uang setelah biaya hidup dan cicilan dibanding total penghasilan. Ini bahan bakar utama menuju Rp1 miliar.'],
+  freedom: ['Financial freedom', 'Perkiraan kemampuan aset membayar hidup. Untuk aset likuid game memakai withdrawal sekitar 4% per tahun; bisnis/properti memakai arus kas aktual.'],
+  wealth: ['Net worth', 'Cash + aset + nilai bisnis dikurangi semua utang. Target utama game ini adalah Rp1 miliar net worth.'],
+  skill: ['Earning power', 'Skill tidak otomatis membuat kaya. Skill menaikkan nilai pasar, peluang negosiasi gaji, job hopping, freelance, dan jenis bisnis yang bisa dibuka.'],
+  paylater: ['PayLater', 'Utang konsumtif membuat harga terasa kecil karena dicicil. Game menghitung cicilan flat, bunga, dan risiko denda bila cash tidak cukup.']
+};
+const q = k => `<button class="q" onclick="event.stopPropagation();gloss('${k}')">?</button>`;
+
+function gloss(k) {
+  const g = G[k];
+  modal(`<div class="tag">Penjelasan</div><h2>${g[0]}</h2><p>${g[1]}</p><button class="primary" onclick="closeModal()">Ngerti</button>`)
+}
+const ASSETS = {
+  tabung: {
+    n: 'Cash / deposito',
+    d: 'Likuid. Return rendah, cocok dana darurat.',
+    mu: .0028,
+    sig: .001,
+    liq: 1
+  },
+  emas: {
+    n: 'Emas',
+    d: 'Tidak menghasilkan cashflow; nilai bergerak naik-turun.',
+    mu: .004,
+    sig: .035,
+    liq: .98
+  },
+  reksa: {
+    n: 'Reksadana campuran',
+    d: 'Diversifikasi, return menengah, tetap bisa turun.',
+    mu: .005,
+    sig: .025,
+    liq: 1
+  },
+  saham: {
+    n: 'Saham / indeks',
+    d: 'Potensi return lebih tinggi, volatilitas juga tinggi.',
+    mu: .007,
+    sig: .045,
+    liq: 1
+  },
+  properti: {
+    n: 'Properti sewa',
+    d: 'Harga naik lambat + sewa, tapi tidak likuid.',
+    mu: .003,
+    sig: .012,
+    liq: .85
+  }
+};
+const SLIDERS = ['tabung', 'emas', 'reksa', 'saham'];
+const PRESETS = {
+  aman: {
+    tabung: 65,
+    emas: 15,
+    reksa: 20,
+    saham: 0
+  },
+  seimbang: {
+    tabung: 30,
+    emas: 10,
+    reksa: 35,
+    saham: 25
+  },
+  berani: {
+    tabung: 15,
+    emas: 5,
+    reksa: 25,
+    saham: 55
+  },
+  likuid: {
+    tabung: 80,
+    emas: 10,
+    reksa: 10,
+    saham: 0
+  }
+};
+const FOOD = {
+  cook: {
+    n: 'Mayoritas masak',
+    cost: 1.5 * JT
+  },
+  mixed: {
+    n: 'Campur masak + makan luar',
+    cost: 2.5 * JT
+  },
+  outside: {
+    n: 'Sering makan di luar',
+    cost: 3.8 * JT
+  },
+  delivery: {
+    n: 'Sering delivery',
+    cost: 5.2 * JT
+  }
+};
+const TRANSPORT = {
+  wfh: {
+    n: 'WFH / dekat',
+    cost: .35 * JT
+  },
+  motor: {
+    n: 'Motor ±15 km/hari',
+    cost: .8 * JT
+  },
+  motor40: {
+    n: 'Motor ±40 km/hari',
+    cost: 1.4 * JT
+  },
+  public: {
+    n: 'Transport umum + ojol',
+    cost: 1.2 * JT
+  },
+  car15: {
+    n: 'Mobil ±15 km/hari',
+    cost: 2.5 * JT
+  },
+  car40: {
+    n: 'Mobil ±40 km/hari',
+    cost: 4.2 * JT
+  }
+};
+const SOCIAL = {
+  rare: {
+    n: 'Jarang nongkrong',
+    cost: .25 * JT
+  },
+  weekly: {
+    n: '1×/minggu',
+    cost: .8 * JT
+  },
+  twice: {
+    n: '2×/minggu',
+    cost: 1.6 * JT
+  },
+  often: {
+    n: '4×/minggu',
+    cost: 3.2 * JT
+  }
+};
+const HEALTH = {
+  jkn: {
+    n: 'JKN/BPJS aktif',
+    premium: .1 * JT,
+    cover: 'jkn'
+  },
+  private: {
+    n: 'Asuransi swasta + JKN',
+    premium: .7 * JT,
+    cover: 'private'
+  },
+  none: {
+    n: 'Bayar sendiri',
+    premium: 0,
+    cover: 'none'
+  }
+};
+const COURSES = {
+  excel: {
+    n: 'Excel + Data dasar',
+    cost: 2.5 * JT,
+    months: 3,
+    hours: 4,
+    boost: .06,
+    skill: 'data',
+    desc: 'Unlock negosiasi berbasis skill + freelance reporting.'
+  },
+  sales: {
+    n: 'Sales & Negotiation',
+    cost: 3 * JT,
+    months: 3,
+    hours: 4,
+    boost: .08,
+    skill: 'sales',
+    desc: 'Naikkan peluang promosi, job offer, dan bisnis retail.'
+  },
+  ads: {
+    n: 'Digital Ads',
+    cost: 3.5 * JT,
+    months: 4,
+    hours: 5,
+    boost: .10,
+    skill: 'ads',
+    desc: 'Unlock freelance ads dan bisnis online.'
+  },
+  design: {
+    n: 'Design / Content',
+    cost: 4 * JT,
+    months: 4,
+    hours: 5,
+    boost: .10,
+    skill: 'design',
+    desc: 'Unlock studio kreatif dan side project.'
+  },
+  cad: {
+    n: 'SketchUp / CAD / 3D',
+    cost: 6 * JT,
+    months: 6,
+    hours: 6,
+    boost: .12,
+    skill: 'cad',
+    desc: 'Unlock jasa gambar/visualisasi. Bukan lisensi profesi arsitek.'
+  },
+  code: {
+    n: 'Coding / No-code',
+    cost: 5 * JT,
+    months: 5,
+    hours: 6,
+    boost: .13,
+    skill: 'code',
+    desc: 'Unlock automation/web side project.'
+  },
+  english: {
+    n: 'Business English',
+    cost: 3 * JT,
+    months: 4,
+    hours: 4,
+    boost: .07,
+    skill: 'english',
+    desc: 'Naikkan peluang perusahaan/klien dengan rate lebih tinggi.'
+  }
+};
+const BIZ = {
+  coffee: {
+    n: 'Coffee kiosk',
+    capital: 80 * JT,
+    baseRev: 45 * JT,
+    gross: .62,
+    net: .12,
+    vol: .18,
+    hours: 28,
+    skill: null,
+    desc: 'Gross margin tinggi, tapi sewa, payroll, waste, dan traffic menekan net margin.'
+  },
+  sports: {
+    n: 'Retail alat olahraga',
+    capital: 50 * JT,
+    baseRev: 35 * JT,
+    gross: .32,
+    net: .10,
+    vol: .16,
+    hours: 20,
+    skill: 'sales',
+    desc: 'Inventory-heavy. Margin kotor sedang, risiko stok mati.'
+  },
+  online: {
+    n: 'Online store / private label',
+    capital: 30 * JT,
+    baseRev: 25 * JT,
+    gross: .42,
+    net: .14,
+    vol: .22,
+    hours: 18,
+    skill: 'ads',
+    desc: 'Lebih ringan aset, tapi ads/marketplace fee bisa makan margin.'
+  },
+  studio: {
+    n: 'Creative / 3D studio',
+    capital: 15 * JT,
+    baseRev: 18 * JT,
+    gross: .72,
+    net: .30,
+    vol: .28,
+    hours: 22,
+    skill: 'design',
+    altSkill: 'cad',
+    desc: 'Modal kecil, margin tinggi, tetapi sangat tergantung skill dan pipeline.'
+  },
+  automation: {
+    n: 'Automation / web service',
+    capital: 12 * JT,
+    baseRev: 16 * JT,
+    gross: .80,
+    net: .35,
+    vol: .30,
+    hours: 20,
+    skill: 'code',
+    desc: 'Service business: modal kecil, namun founder time tinggi.'
+  }
+};
+let S = null,
+  U = null,
+  obi = 0,
+  obLog = [];
+
+function livingBreakdown() {
+  return S.costs
+}
+
+function livingCost() {
+  return Object.values(S.costs).reduce((a, b) => a + b, 0)
+}
+
+function generalDebtPay() {
+  if (S.debt <= 0) return 0;
+  return Math.min(S.debt, Math.max(S.debt * .012, S.debt * .02))
+}
+
+function consumerPay() {
+  return S.consumerLoans.reduce((a, l) => a + l.payment, 0)
+}
+
+function allDebt() {
+  return S.debt + S.consumerLoans.reduce((a, l) => a + l.balance, 0)
+}
+
+function businessValue() {
+  return S.businesses.reduce((a, b) => a + b.value, 0)
+}
+
+function assetValue() {
+  return Object.values(S.a).reduce((a, b) => a + b, 0)
+}
+
+function nw() {
+  return S.cash + assetValue() + businessValue() - allDebt()
+}
+
+function activeIncome() {
+  return (S.quit ? 0 : S.inc) + (S.tempMonths > 0 ? S.tempIncome : 0)
+}
+
+function businessIncome() {
+  return S.lastBusinessProfit || 0
+}
+
+function totalIncome() {
+  return activeIncome() + businessIncome()
+}
+
+function surplus() {
+  return totalIncome() - livingCost() - generalDebtPay() - consumerPay()
+}
+
+function spendingRate() {
+  const inc = Math.max(totalIncome(), 1);
+  return (livingCost() + generalDebtPay() + consumerPay()) / inc
+}
+
+function savingRate() {
+  return surplus() / Math.max(totalIncome(), 1)
+}
+
+function age() {
+  return U.age + Math.floor(S.month / 12)
+}
+
+function freedomIncome() {
+  const liquid = (S.cash + S.a.tabung + S.a.emas + S.a.reksa + S.a.saham) * FREEDOM_RATE;
+  const rent = S.a.properti * .004;
+  const biz = Math.max(0, businessIncome() * .55);
+  return liquid + rent + biz
+}
+
+function freedom() {
+  return freedomIncome() / Math.max(livingCost(), 1)
+}
+
+function targetProgress() {
+  return clamp(nw() / S.goal, 0, 1.2)
+}
+
+function hours() {
+  let h = S.quit ? 0 : S.jobHours;
+  h += S.activeCourses.reduce((a, c) => a + COURSES[c.id].hours, 0);
+  h += S.businesses.reduce((a, b) => a + (b.manager ? 5 : BIZ[b.type].hours), 0);
+  return Math.round(h)
+}
+
+function riskOfRuin() {
+  const n = Math.max(nw(), 1),
+    buf = (S.cash + S.a.tabung) / Math.max(livingCost(), 1),
+    lev = allDebt() / n,
+    risky = (S.a.saham * .5 + businessValue() * .45) / (Math.max(assetValue() + businessValue() + S.cash, 1));
+  return Math.round(clamp(8 + risky * 42 + clamp(lev, 0, 4) * 12 - clamp(buf, 0, 10) * 2 + (surplus() < 0 ? 18 : 0) + (S.stress > 75 ? 6 : 0), 1, 95))
+}
+
+function goalFor(startNW) {
+  return startNW >= 10 * M ? 100 * M : startNW >= M ? 10 * M : M
+}
+
+function goalName() {
+  return S.goal === M ? 'Rp1 miliar' : S.goal === 10 * M ? 'Rp10 miliar' : 'Rp100 miliar'
+}
+
+function pushLog(t, m) {
+  S.log.unshift({
+    m: S.month,
+    t,
+    text: m
+  });
+  S.log = S.log.slice(0, 35)
+}
+
+function save() {
+  store.set('cr2-save', {
+    S,
+    U,
+    obi,
+    obLog
+  })
+}
+
+function startGame() {
+  const start = U.savings - U.debt;
+  const health = HEALTH[U.health];
+  const base = {
+    housing: U.housing,
+    food: FOOD[U.food].cost,
+    transport: TRANSPORT[U.transport].cost,
+    social: SOCIAL[U.social].cost,
+    health: health.premium,
+    other: U.other
+  };
+  S = {
+    sid: uid(),
+    month: 0,
+    cash: U.savings,
+    inc: U.income,
+    debt: U.debt,
+    consumerLoans: [],
+    quit: U.job === 'none',
+    jobHours: U.job === 'usaha' ? 50 : U.job === 'none' ? 0 : 45,
+    costs: base,
+    a: {
+      tabung: 0,
+      emas: 0,
+      reksa: 0,
+      saham: 0,
+      properti: 0
+    },
+    alloc: {
+      ...PRESETS.seimbang
+    },
+    preset: 'seimbang',
+    businesses: [],
+    skills: [],
+    activeCourses: [],
+    career: {
+      marketBoost: 0,
+      tenure: 0,
+      lastNegotiate: -99,
+      promotions: 0
+    },
+    life: 68,
+    stress: 22,
+    impulse: 25,
+    tempIncome: 0,
+    tempMonths: 0,
+    lastBusinessProfit: 0,
+    lastBusinessRevenue: 0,
+    hist: [],
+    baseHist: [],
+    baseline: start,
+    goal: goalFor(start),
+    lastRun: null,
+    log: [],
+    over: false,
+    ruin: false,
+    won: false,
+    badges: [],
+    beh: {
+      paylater: 0,
+      impulseBuy: 0,
+      skipBuy: 0,
+      health: 0,
+      course: 0,
+      business: 0,
+      promo: 0,
+      jobhop: 0
+    },
+    run: null
+  };
+  S.hist.push(nw());
+  S.baseHist.push(S.baseline);
+  pushLog('Mulai', `${U.name} mulai dengan net worth ${rp(nw())}, income ${rp(S.inc)}/bln, living cost ${rp(livingCost())}/bln. Target: ${goalName()}.`);
+  track('game_start', {
+    profile: U,
+    goal: S.goal,
+    living: S.costs
+  });
+  save();
+  render()
+}
+
+function allocTotal() {
+  return SLIDERS.reduce((a, k) => a + S.alloc[k], 0)
+}
+
+function setPreset(p) {
+  S.alloc = {
+    ...PRESETS[p]
+  };
+  S.preset = p;
+  render()
+}
+
+function bump(k, d) {
+  if (d > 0 && allocTotal() >= 100) return;
+  S.alloc[k] = clamp(S.alloc[k] + d, 0, 100);
+  S.preset = 'custom';
+  render()
+}
+
+function investCash() {
+  if (S.cash <= 0) return;
+  const reserve = livingCost() * 3;
+  const investable = Math.max(0, S.cash - reserve);
+  if (investable <= 0) return toast('Cash belum lewat dana darurat 3 bulan.');
+  const t = allocTotal();
+  if (!t) return toast('Atur strategi dulu.');
+  for (const k of SLIDERS) {
+    const x = investable * S.alloc[k] / 100;
+    S.cash -= x;
+    S.a[k] += x
+  }
+  pushLog('Investasi', `${rp(investable)} cash diinvestasikan sesuai alokasi.`);
+  track('invest_cash', {
+    amt: investable,
+    alloc: S.alloc
+  });
+  render()
+}
+
+function sell(k, frac) {
+  const v = S.a[k] * frac;
+  if (v <= 0) return;
+  const got = v * ASSETS[k].liq;
+  S.a[k] -= v;
+  S.cash += got;
+  pushLog('Jual aset', `${ASSETS[k].n} ${rp(v)} dijual, cash masuk ${rp(got)}.`);
+  render()
+}
+
+function payDebt() {
+  const amt = Math.min(S.cash, S.debt);
+  if (amt <= 0) return;
+  S.cash -= amt;
+  S.debt -= amt;
+  pushLog('Utang', `Melunasi ${rp(amt)} utang.`);
+  render()
+}
+
+function startCourse(id) {
+  const c = COURSES[id];
+  if (S.skills.includes(c.skill) || S.activeCourses.some(x => x.id === id)) return;
+  if (S.cash < c.cost) return toast('Cash belum cukup untuk kelas ini.');
+  S.cash -= c.cost;
+  S.activeCourses.push({
+    id,
+    remain: c.months
+  });
+  S.beh.course++;
+  S.stress = clamp(S.stress + 4, 0, 100);
+  pushLog('Belajar', `Mulai ${c.n}: ${rp(c.cost)}, ${c.months} bulan.`);
+  track('course_start', {
+    id,
+    cost: c.cost
+  });
+  save();
+  render()
+}
+
+function negotiateRaise() {
+  if (S.quit || U.job !== 'karyawan') return toast('Negosiasi gaji tersedia untuk jalur karyawan.');
+  if (S.month - S.career.lastNegotiate < 6) return toast('Coba lagi setelah 6 bulan.');
+  if (!S.skills.length) return toast('Bangun skill dulu supaya punya leverage.');
+  S.career.lastNegotiate = S.month;
+  const p = clamp(.35 + S.skills.length * .09 + S.career.marketBoost * .7, 0, 0.82);
+  if (Math.random() < p) {
+    const raise = rand(.06, .16);
+    S.inc *= 1 + raise;
+    S.beh.promo++;
+    pushLog('Negosiasi berhasil', `Gaji naik ${pct(raise)} menjadi ${rp(S.inc)}/bln.`);
+    toast('Negosiasi berhasil: +' + pct(raise))
+  } else {
+    pushLog('Negosiasi gagal', 'Perusahaan belum menaikkan gaji. Market value tetap naik; kamu bisa coba lagi atau job hopping.');
+    toast('Belum berhasil. Coba bangun leverage lagi.')
+  }
+  save();
+  render()
+}
+
+function seekJobOffer() {
+  if (S.quit && U.job === 'none') {} else if (U.job !== 'karyawan' && U.job !== 'freelance') return toast('Job offer dipakai untuk jalur karyawan/freelance.');
+  if (S.cash < 0) return;
+  const skillFactor = S.skills.length * .04 + S.career.marketBoost;
+  const chance = clamp(.45 + skillFactor, 0, .9);
+  if (Math.random() > chance) {
+    pushLog('Job hunting', 'Belum ada offer yang lebih baik bulan ini.');
+    S.stress = clamp(S.stress + 3, 0, 100);
+    return render()
+  }
+  const jump = rand(.10, .30) + Math.min(.10, skillFactor);
+  const offer = Math.max(S.inc, JT * 3) * (1 + jump);
+  modal(`<div class="tag good">Career offer</div><h2>Ada tawaran ${rp(offer)}/bulan</h2><p>Naik ${pct(jump)} dari income kerja sekarang. Pindah kerja reset tenure, tapi earning power naik.</p><button class="choice" onclick="acceptOffer(${offer});closeModal()"><b>Ambil offer</b><span>Income kerja menjadi ${rp(offer)}/bln.</span></button><button class="choice" onclick="closeModal()"><b>Tolak</b></button>`)
+}
+
+function acceptOffer(v) {
+  S.inc = v;
+  S.quit = false;
+  S.jobHours = 45;
+  S.career.tenure = 0;
+  S.beh.jobhop++;
+  S.life = clamp(S.life - 2, 0, 100);
+  pushLog('Pindah kerja', `Offer diterima. Income kerja ${rp(S.inc)}/bln.`);
+  save();
+  render()
+}
+
+function canStartBiz(id) {
+  const b = BIZ[id];
+  return !b.skill || S.skills.includes(b.skill) || (b.altSkill && S.skills.includes(b.altSkill))
+}
+
+function startBusiness(id) {
+  const b = BIZ[id];
+  if (!canStartBiz(id)) return toast('Skill belum unlock bisnis ini.');
+  if (S.cash < b.capital) return toast('Cash belum cukup modal.');
+  S.cash -= b.capital;
+  S.businesses.push({
+    id: uid(),
+    type: id,
+    value: b.capital,
+    scale: 1,
+    manager: false,
+    age: 0,
+    lastProfit: 0,
+    lastRevenue: 0
+  });
+  S.beh.business++;
+  pushLog('Buka bisnis', `${b.n} dibuka dengan modal ${rp(b.capital)}.`);
+  track('business_start', {
+    id,
+    capital: b.capital
+  });
+  save();
+  render()
+}
+
+function toggleBizManager(id) {
+  const b = S.businesses.find(x => x.id === id);
+  if (!b) return;
+  b.manager = !b.manager;
+  pushLog('Bisnis', b.manager ? 'Manager direkrut: jam founder turun, margin terpotong.' : 'Founder kembali pegang operasional.');
+  render()
+}
+
+function addConsumerLoan(label, principal, months, rate) {
+  const total = principal * (1 + rate * months),
+    payment = total / months;
+  S.consumerLoans.push({
+    id: uid(),
+    label,
+    balance: total,
+    payment,
+    remain: months,
+    rate
+  });
+  S.beh.paylater++;
+  S.impulse = clamp(S.impulse + 8, 0, 100);
+  S.stress = clamp(S.stress + 5, 0, 100);
+  pushLog('PayLater', `${label}: ${months}× ${rp(payment)} (rate ${pct(rate)}/bln).`)
+}
+
+function buyCash(label, price, life = 2) {
+  if (S.cash < price) return toast('Cash tidak cukup.');
+  S.cash -= price;
+  S.life = clamp(S.life + life, 0, 100);
+  S.impulse = clamp(S.impulse + 2, 0, 100);
+  S.beh.impulseBuy++;
+  pushLog('Belanja', `${label} dibeli tunai ${rp(price)}.`)
+}
+
+function runBusinesses() {
+  let profit = 0,
+    revenue = 0;
+  for (const b of S.businesses) {
+    const cfg = BIZ[b.type];
+    b.age++;
+    const maturity = 1 + Math.min(.65, b.age * .012);
+    const demand = clamp(1 + randn() * cfg.vol, .45, 1.65);
+    const rev = cfg.baseRev * b.scale * maturity * demand;
+    let margin = cfg.net - (b.manager ? .035 : 0);
+    if (S.skills.includes('sales') && ['sports', 'coffee'].includes(b.type)) margin += .015;
+    if (S.skills.includes('ads') && ['online', 'coffee'].includes(b.type)) margin += .015;
+    const p = rev * margin;
+    b.lastRevenue = rev;
+    b.lastProfit = p;
+    revenue += rev;
+    profit += p;
+    const distribute = p * .6;
+    b.value = Math.max(0, b.value + p * .4);
+    profit += distribute - p;
+    if (Math.random() < .015) {
+      const hit = b.value * rand(.05, .18);
+      b.value -= hit;
+      pushLog('Bisnis kena masalah', `${cfg.n}: repair/stok/waste menekan nilai bisnis ${rp(hit)}.`)
+    }
+  }
+  S.lastBusinessProfit = profit;
+  S.lastBusinessRevenue = revenue
+}
+
+function processConsumerLoans() {
+  for (const l of S.consumerLoans) {
+    const due = Math.min(l.payment, l.balance);
+    if (S.cash >= due) {
+      S.cash -= due;
+      l.balance -= due;
+      l.remain--
+    } else {
+      const paid = Math.max(0, S.cash);
+      S.cash = 0;
+      l.balance -= paid;
+      const overdue = due - paid;
+      const fee = overdue * .05;
+      l.balance += fee;
+      S.stress = clamp(S.stress + 8, 0, 100);
+      pushLog('Telat cicilan', `${l.label}: kurang ${rp(overdue)}, kena denda simulasi ${rp(fee)}.`);
+      l.remain = Math.max(1, l.remain)
+    }
+  }
+  S.consumerLoans = S.consumerLoans.filter(l => l.balance > 1000 && l.remain > 0)
+}
+
+function processCourses() {
+  for (const c of S.activeCourses) c.remain--;
+  const done = S.activeCourses.filter(c => c.remain <= 0);
+  S.activeCourses = S.activeCourses.filter(c => c.remain > 0);
+  for (const c of done) {
+    const cfg = COURSES[c.id];
+    if (!S.skills.includes(cfg.skill)) S.skills.push(cfg.skill);
+    S.career.marketBoost += cfg.boost;
+    S.stress = clamp(S.stress - 4, 0, 100);
+    pushLog('Skill unlock', `${cfg.n} selesai. Market value +${pct(cfg.boost)}.`);
+    toast('Skill unlock: ' + cfg.n)
+  }
+}
+
+function annualCareer() {
+  if (S.quit || S.inc <= 0) return null;
+  let raise = 0;
+  if (U.job === 'karyawan') {
+    raise = clamp(.058 + randn() * .025, 0, .12);
+    const promoChance = clamp(.08 + S.skills.length * .035 + S.career.marketBoost * .25, 0, .35);
+    if (Math.random() < promoChance) {
+      const promo = rand(.12, .25);
+      raise += promo;
+      S.career.promotions++;
+      S.beh.promo++;
+      pushLog('Promosi', `Promosi internal menambah ${pct(promo)} di luar annual review.`)
+    }
+  } else if (U.job === 'freelance') {
+    raise = clamp(.04 + S.career.marketBoost * .15 + randn() * .03, -.03, .18)
+  } else if (U.job === 'usaha') {
+    raise = clamp(.05 + randn() * .04, -.08, .18)
+  }
+  S.inc *= 1 + raise;
+  return raise
+}
+
+function inflateLiving() {
+  S.costs.housing *= 1.002;
+  S.costs.food *= 1.003;
+  S.costs.transport *= 1.0025;
+  S.costs.social *= 1.003;
+  S.costs.health *= 1.0015;
+  S.costs.other *= 1.0025
+}
+
+function investSurplus(amount) {
+  if (amount <= 0) return;
+  const reserve = livingCost() * 3;
+  if (S.cash <= reserve) return;
+  const investable = Math.min(amount, S.cash - reserve);
+  if (investable <= 0) return;
+  for (const k of SLIDERS) {
+    const x = investable * S.alloc[k] / 100;
+    S.cash -= x;
+    S.a[k] += x
+  }
+}
+
+function emergency() {
+  if (S.cash >= 0) return;
+  let need = -S.cash;
+  for (const k of ['tabung', 'reksa', 'emas', 'saham']) {
+    if (need <= 0) break;
+    const take = Math.min(S.a[k], need / ASSETS[k].liq);
+    S.a[k] -= take;
+    S.cash += take * ASSETS[k].liq;
+    need = -S.cash
+  }
+  if (S.cash < 0) {
+    const loan = -S.cash * 1.05;
+    S.debt += loan;
+    S.cash = 0;
+    S.stress = clamp(S.stress + 12, 0, 100);
+    pushLog('Kehabisan cash', `Terpaksa menambah utang ${rp(loan)}.`)
+  }
+  if (allDebt() > Math.max(assetValue() + businessValue() + activeIncome() * 12, 50 * JT) * 1.8) {
+    S.ruin = true;
+    S.over = true
+  }
+}
+
+function runMonth() {
+  if (S.over) return null;
+  runBusinesses();
+  const inc = activeIncome() + businessIncome();
+  const gd = generalDebtPay(),
+    living = livingCost(),
+    cp = consumerPay();
+  S.cash += inc - living - gd;
+  S.baseline += activeIncome() - living - gd;
+  const interest = S.debt * .012;
+  S.debt -= Math.max(gd - interest, 0);
+  if (S.debt < 1000) S.debt = 0;
+  processConsumerLoans();
+  if (S.tempMonths > 0) S.tempMonths--;
+  processCourses();
+  investSurplus(Math.max(0, inc - living - gd - cp));
+  for (const k of SLIDERS) {
+    const A = ASSETS[k],
+      r = A.mu + A.sig * randn();
+    S.a[k] = Math.max(0, S.a[k] * (1 + r))
+  }
+  if (S.a.properti > 0) S.a.properti *= 1 + ASSETS.properti.mu + ASSETS.properti.sig * randn();
+  inflateLiving();
+  S.month++;
+  S.career.tenure++;
+  S.stress = clamp(S.stress + (hours() > 65 ? 2 : -.5) + (spendingRate() > 1 ? 2 : 0), 0, 100);
+  S.impulse = clamp(S.impulse - .4, 5, 100);
+  let annual = null;
+  if (S.month % 12 === 0) annual = annualCareer();
+  emergency();
+  S.hist.push(nw());
+  S.baseHist.push(S.baseline);
+  checkBadges();
+  if (nw() >= S.goal && !S.won) {
+    S.won = true;
+    S.over = true
+  }
+  if (S.month >= MAX_MONTHS && !S.over) S.over = true;
+  if (S.ruin) S.over = true;
+  if (S.over) return {
+    type: 'end'
+  };
+  const ev = pickEvent();
+  return {
+    type: 'month',
+    event: ev,
+    annual
+  }
+}
+
+function startRun(n) {
+  if (S.over) return renderEnd();
+  if (S.run) return;
+  S.run = {
+    planned: n,
+    remaining: n,
+    startMonth: S.month,
+    startNW: nw(),
+    startInc: S.inc,
+    startLiving: livingCost()
+  };
+  continueRun()
+}
+
+function continueRun() {
+  if (!S.run || S.over) {
+    if (S.over) return renderEnd();
+    return
+  }
+  while (S.run.remaining > 0) {
+    const out = runMonth();
+    S.run.remaining--;
+    save();
+    if (out.type === 'end') {
+      S.run = null;
+      return renderEnd()
+    }
+    render();
+    if (out.annual !== null) {
+      return showAnnualReview(out.annual, () => continueRun())
+    }
+    if (out.event) {
+      return showEvent(out.event, () => continueRun())
+    }
+  }
+  const r = S.run;
+  S.lastRun = {
+    months: r.planned,
+    startNW: r.startNW,
+    endNW: nw(),
+    growth: r.startNW !== 0 ? (nw() - r.startNW) / Math.abs(r.startNW) : 0,
+    incomeDelta: S.inc - r.startInc,
+    livingDelta: livingCost() - r.startLiving
+  };
+  S.run = null;
+  save();
+  render();
+  showRunRecap(S.lastRun)
+}
+
+function showRunRecap(r) {
+  modal(`<div class="tag good">${r.months} bulan selesai</div><h2>${r.endNW>=r.startNW?'+':''}${rp(r.endNW-r.startNW)} net worth</h2><p class="eff">${r.growth>=0?'+':''}${pct(r.growth)} · income kerja ${r.incomeDelta>=0?'+':''}${rp(r.incomeDelta)}/bln · living cost ${r.livingDelta>=0?'+':''}${rp(r.livingDelta)}/bln</p><p>Progress sekarang <b>${pct(targetProgress())}</b> menuju ${goalName()}.</p><button class="primary" onclick="closeModal()">Lanjut atur strategi</button>`)
+}
+
+function pickEvent() {
+  if (S.month < 2 || Math.random() > .18) return null;
+  const pool = ['health', 'phone', 'flash', 'career', 'sidegig', 'inflation', 'family'];
+  if (nw() > 80 * JT && (!S.carMonth || S.month - S.carMonth > 96)) pool.push('car');
+  if (S.phoneMonth && S.month - S.phoneMonth < 24) pool.splice(pool.indexOf('phone'), 1);
+  if (S.skills.length) pool.push('skillgig');
+  if (S.businesses.length) pool.push('bizshock');
+  return pick(pool)
+}
+
+function healthScenario() {
+  const u = Math.random();
+  if (u < .5) return {
+    name: 'Demam / infeksi ringan',
+    base: [.25 * JT, 1.2 * JT],
+    days: [0, 2]
+  };
+  if (u < .82) return {
+    name: 'Rawat inap 2–4 hari',
+    base: [6 * JT, 18 * JT],
+    days: [3, 7]
+  };
+  if (u < .95) return {
+    name: 'Kecelakaan / cedera',
+    base: [10 * JT, 40 * JT],
+    days: [7, 21]
+  };
+  return {
+    name: 'Tindakan besar',
+    base: [25 * JT, 100 * JT],
+    days: [14, 45]
+  }
+}
+
+function healthOOP(sc) {
+  const full = rand(sc.base[0], sc.base[1]),
+    cov = U.health;
+  if (cov === 'jkn') return Math.max(.1 * JT, full * rand(.03, .16));
+  if (cov === 'private') return Math.max(.05 * JT, full * rand(.01, .08));
+  return full
+}
+
+function showEvent(type, done) {
+  const finish = () => {
+    closeModal();
+    emergency();
+    save();
+    render();
+    done && done()
+  };
+  if (type === 'health') {
+    const sc = healthScenario(),
+      oop = healthOOP(sc),
+      days = Math.round(rand(sc.days[0], sc.days[1]));
+    modal(`<div class="tag bad">Kesehatan</div><h2>${sc.name}</h2><p>Estimasi biaya kejadian sebelum perlindungan bervariasi. Dengan status <b>${HEALTH[U.health].n}</b>, out-of-pocket simulasi kamu <b>${rp(oop)}</b>.</p><p class="eff">Kehilangan produktivitas sekitar ${days} hari. Ini bukan estimasi tagihan rumah sakit nyata.</p><button class="choice" id="hpay"><b>Bayar ${rp(oop)}</b><span>Diambil dari cash/dana darurat.</span></button>${U.health==='none'?`<button class="choice" id="hdebt"><b>Utang biaya kesehatan</b><span>Cash aman hari ini, cicilan muncul setelahnya.</span></button>`:''}`);
+    $('#hpay').onclick = () => {
+      S.cash -= oop;
+      S.life -= 3;
+      S.beh.health++;
+      pushLog('Kesehatan', `${sc.name}: keluar ${rp(oop)}.`);
+      finish()
+    };
+    if ($('#hdebt')) $('#hdebt').onclick = () => {
+      S.debt += oop;
+      S.stress += 10;
+      S.beh.health++;
+      pushLog('Kesehatan', `${sc.name}: ${rp(oop)} masuk utang.`);
+      finish()
+    };
+    return
+  }
+  if (type === 'phone') {
+    const tiers = [{
+        n: 'HP entry',
+        p: 3 * JT
+      }, {
+        n: 'HP mid-range',
+        p: 7 * JT
+      }, {
+        n: 'Flagship',
+        p: 16 * JT
+      }, {
+        n: 'Flagship premium',
+        p: 25 * JT
+      }],
+      aff = Math.max(0, Math.min(3, Math.floor(activeIncome() / (8 * JT)))),
+      t = tiers[clamp(aff + Math.floor(rand(-1, 2)), 0, 3)];
+    modal(`<div class="tag">Godaan gadget</div><h2>${t.n} ${rp(t.p)}</h2><p>HP lama masih jalan. Kamu bisa beli tunai, cicil, atau skip. PayLater sengaja dibuat terasa ringan per bulan.</p><button class="choice" id="pcash" ${S.cash<t.p?'disabled':''}><b>Beli tunai</b><span>${rp(t.p)} keluar sekarang.</span></button><button class="choice" id="p6"><b>PayLater 6 bulan</b><span>Simulasi bunga flat 2,95%/bulan → sekitar ${rp(t.p*(1+.0295*6)/6)}/bln.</span></button><button class="choice" id="pskip"><b>Skip</b><span>Tidak semua upgrade harus dibeli.</span></button>`);
+    if ($('#pcash')) $('#pcash').onclick = () => {
+      S.phoneMonth = S.month;
+      buyCash(t.n, t.p, 3);
+      finish()
+    };
+    $('#p6').onclick = () => {
+      S.phoneMonth = S.month;
+      addConsumerLoan(t.n, t.p, 6, .0295);
+      S.life += 3;
+      finish()
+    };
+    $('#pskip').onclick = () => {
+      S.beh.skipBuy++;
+      S.impulse = Math.max(5, S.impulse - 3);
+      pushLog('Belanja', `${t.n} dilewatkan.`);
+      finish()
+    };
+    return
+  }
+  if (type === 'car') {
+    const options = [{
+        n: 'Mobil bekas ekonomis',
+        p: 100 * JT,
+        up: .9 * JT
+      }, {
+        n: 'LCGC baru',
+        p: 190 * JT,
+        up: 1.3 * JT
+      }, {
+        n: 'Compact / MPV',
+        p: 330 * JT,
+        up: 1.8 * JT
+      }, {
+        n: 'Premium',
+        p: 750 * JT,
+        up: 3.5 * JT
+      }],
+      max = nw() > 1.5 * M ? 3 : nw() > 500 * JT ? 2 : 1,
+      o = options[max];
+    modal(`<div class="tag">Kendaraan</div><h2>${o.n} · ${rp(o.p)}</h2><p>Mobil bukan cuma harga beli. Setelah punya, game menambah bensin/servis/pajak/parkir sekitar <b>${rp(o.up)}/bln</b>.</p><button class="choice" id="ccash" ${S.cash<o.p?'disabled':''}><b>Beli tunai</b><span>${rp(o.p)} + living cost naik ${rp(o.up)}/bln.</span></button><button class="choice" id="ccredit" ${S.cash<o.p*.2?'disabled':''}><b>Kredit 48 bulan</b><span>DP 20%, simulasi bunga 0,8%/bln flat.</span></button><button class="choice" id="cskip"><b>Belum perlu</b></button>`);
+    if ($('#ccash')) $('#ccash').onclick = () => {
+      S.cash -= o.p;
+      S.costs.transport += o.up;
+      S.life += 8;
+      S.carMonth = S.month;
+      pushLog('Mobil', `${o.n} dibeli tunai.`);
+      finish()
+    };
+    $('#ccredit').onclick = () => {
+      const dp = o.p * .2;
+      if (S.cash < dp) return toast('DP belum cukup.');
+      S.cash -= dp;
+      addConsumerLoan(o.n + ' kredit', o.p * .8, 48, .008);
+      S.carMonth = S.month;
+      S.costs.transport += o.up;
+      S.life += 8;
+      finish()
+    };
+    $('#cskip').onclick = () => finish();
+    return
+  }
+  if (type === 'flash') {
+    const price = pick([.8, 1.5, 2.5, 4, 6]) * JT;
+    modal(`<div class="tag">Flash sale</div><h2>Barang wishlist diskon — ${rp(price)}</h2><p>Countdown 02:59. Kamu tidak merencanakan belanja ini minggu lalu.</p><button class="choice" id="fcash" ${S.cash<price?'disabled':''}><b>Beli tunai</b></button><button class="choice" id="fpl"><b>PayLater 3 bulan</b><span>Simulasi 3,95%/bln.</span></button><button class="choice" id="fskip"><b>Tutup aplikasi</b><span>Impulse score turun.</span></button>`);
+    if ($('#fcash')) $('#fcash').onclick = () => {
+      buyCash('Flash sale', price, 1);
+      finish()
+    };
+    $('#fpl').onclick = () => {
+      addConsumerLoan('Flash sale', price, 3, .0395);
+      S.life += 1;
+      finish()
+    };
+    $('#fskip').onclick = () => {
+      S.impulse = Math.max(5, S.impulse - 5);
+      S.beh.skipBuy++;
+      finish()
+    };
+    return
+  }
+  if (type === 'career') {
+    if (U.job !== 'karyawan' || S.quit) return finish();
+    const eligible = S.skills.length > 0,
+      raise = eligible ? rand(.10, .22) : rand(.04, .09);
+    modal(`<div class="tag good">Karier</div><h2>${eligible?'Scope kerja naik — minta kompensasi?':'Annual opportunity'}</h2><p>${eligible?'Skill yang sudah kamu bangun memberi leverage.':'Belum banyak leverage skill, tapi performa tetap bisa dihargai.'}</p><button class="choice" id="cask"><b>Minta kenaikan</b><span>Peluang berhasil; target sekitar ${pct(raise)}.</span></button><button class="choice" id="cno"><b>Diam dulu</b></button>`);
+    $('#cask').onclick = () => {
+      const chance = eligible ? .65 : .32;
+      if (Math.random() < chance) {
+        S.inc *= 1 + raise;
+        pushLog('Karier', `Gaji naik ${pct(raise)} lewat negosiasi.`);
+        toast('Gaji naik ' + pct(raise))
+      } else {
+        S.stress += 2;
+        pushLog('Karier', 'Negosiasi belum berhasil.')
+      }
+      finish()
+    };
+    $('#cno').onclick = () => finish();
+    return
+  }
+  if (type === 'sidegig' || type === 'skillgig') {
+    const base = Math.max(2 * JT, S.inc * .25),
+      boost = 1 + S.skills.length * .15,
+      offer = Math.round(base * boost / JT) * JT;
+    modal(`<div class="tag good">Side income</div><h2>Proyek ${rp(offer)}/bulan × 3 bulan</h2><p>Butuh sekitar 8–12 jam tambahan per minggu. Skill yang kamu punya menaikkan rate.</p><button class="choice" id="gok"><b>Ambil</b><span>Income tambahan 3 bulan, stress naik sedikit.</span></button><button class="choice" id="gno"><b>Lewat</b></button>`);
+    $('#gok').onclick = () => {
+      S.tempIncome = offer;
+      S.tempMonths = 3;
+      S.stress += 5;
+      pushLog('Side project', `${rp(offer)}/bln untuk 3 bulan.`);
+      finish()
+    };
+    $('#gno').onclick = () => finish();
+    return
+  }
+  if (type === 'inflation') {
+    const bump = rand(.02, .05);
+    for (const k of Object.keys(S.costs)) S.costs[k] *= 1 + bump;
+    pushLog('Inflasi', `Living cost melonjak ${pct(bump)}.`);
+    modal(`<div class="tag bad">Inflasi</div><h2>Biaya hidup naik ${pct(bump)}</h2><p>Food, transport, housing, dan kebutuhan lain naik bersama. Income belum tentu langsung mengikuti.</p><button class="primary" id="iok">Lanjut</button>`);
+    $('#iok').onclick = finish;
+    return
+  }
+  if (type === 'family') {
+    const cost = rand(1, 6) * JT;
+    modal(`<div class="tag">Keluarga</div><h2>Ada kebutuhan mendadak ${rp(cost)}</h2><p>Acara keluarga, perbaikan rumah, perjalanan, atau membantu orang dekat.</p><button class="choice" id="fhelp"><b>Bantu dari cash</b></button><button class="choice" id="fhalf"><b>Bantu separuh</b></button>`);
+    $('#fhelp').onclick = () => {
+      S.cash -= cost;
+      S.life += 3;
+      finish()
+    };
+    $('#fhalf').onclick = () => {
+      S.cash -= cost * .5;
+      S.life += 1;
+      finish()
+    };
+    return
+  }
+  if (type === 'bizshock') {
+    const b = pick(S.businesses),
+      cfg = BIZ[b.type],
+      good = Math.random() > .45;
+    if (good) {
+      const gain = b.value * rand(.04, .14);
+      b.value += gain;
+      pushLog('Bisnis tumbuh', `${cfg.n}: repeat order/viral menambah nilai ${rp(gain)}.`);
+      modal(`<div class="tag good">Bisnis</div><h2>${cfg.n} dapat momentum</h2><p>Repeat order / traffic naik. Nilai bisnis +${rp(gain)}.</p><button class="primary" id="bok">Lanjut</button>`);
+      $('#bok').onclick = finish
+    } else {
+      const hit = b.value * rand(.06, .18);
+      b.value -= hit;
+      pushLog('Bisnis turun', `${cfg.n}: demand/stok/waste menekan nilai ${rp(hit)}.`);
+      modal(`<div class="tag bad">Bisnis</div><h2>${cfg.n} kena tekanan</h2><p>Demand turun, stok mati, waste, atau biaya operasional naik. Nilai bisnis −${rp(hit)}.</p><button class="primary" id="bok">Lanjut</button>`);
+      $('#bok').onclick = finish
+    }
+    return
+  }
+}
+
+function showAnnualReview(raise, done) {
+  const y = S.month / 12;
+  if (raise !== null) pushLog('Gaji', `Review tahunan: ${raise>=0?'naik':'turun'} ${pct(Math.abs(raise))} → ${rp(S.inc)}/bln.`);
+  track('year_end', {y, nw: nw(), inc: S.inc, living: livingCost(), debt: allDebt(), skills: S.skills.length, biz: S.businesses.length, raise});
+  const
+    prev = S.hist[Math.max(0, S.hist.length - 13)] || S.hist[0],
+    g = prev !== 0 ? (nw() - prev) / Math.abs(prev) : 0;
+  modal(`<div class="tag">Tutup buku tahun ${y}</div><h2>Net worth ${rp(nw())}</h2><p class="eff">Growth 12 bulan ${g>=0?'+':''}${pct(g)} · living cost ${rp(livingCost())}/bln · spending rate ${pct(spendingRate())}</p>${raise!==null?`<p>Gaji: <b>${rp(S.inc/(1+raise))} → ${rp(S.inc)}</b> (${raise>=0?'+':''}${pct(raise)}/thn). Kenaikan dasar tidak dijamin; skill, negosiasi, dan pindah kerja yang membuat lompatan besar.</p>`:''}<button class="primary" id="yr">Lanjutkan run</button>`);
+  $('#yr').onclick = () => {
+    closeModal();
+    done && done()
+  }
+}
+
+function checkBadges() {
+  const defs = [
+    ['100m', 'Rp100 jt', () => nw() >= 100 * JT],
+    ['250m', 'Rp250 jt', () => nw() >= 250 * JT],
+    ['500m', 'Rp500 jt', () => nw() >= 500 * JT],
+    ['1b', 'Rp1 miliar', () => nw() >= M],
+    ['skill', 'Skill pertama', () => S.skills.length > 0],
+    ['biz', 'Bisnis pertama', () => S.businesses.length > 0],
+    ['debt', 'Bebas utang', () => allDebt() === 0 && U.debt > 0],
+    ['save30', 'Saving rate 30%', () => savingRate() >= .3]
+  ];
+  for (const [id, n, c] of defs)
+    if (!S.badges.includes(id) && c()) {
+      S.badges.push(id);
+      pushLog('Achievement', n);
+      toast('🏁 ' + n)
+    }
+}
+
+function coachLine() {
+  if (S.month === 0) return `Target pertama bukan return paling tinggi. Targetmu <b>${goalName()}</b>. Jaga saving rate, naikkan income, lalu invest konsisten.`;
+  if (spendingRate() > 1) return `<b>Spending rate di atas 100%.</b> Kamu hidup dari cash/utang. Potong lifestyle atau naikkan income sebelum mengejar return.`;
+  if (S.consumerLoans.length) return `Kamu punya <b>${S.consumerLoans.length} cicilan konsumtif</b>. PayLater mengurangi ruang investasi tiap bulan. Jangan tertipu cicilan kecil.`;
+  if (!S.skills.length && S.inc < 15 * JT) return `Return investasi tidak akan mengalahkan lompatan income di fase awal. Pertimbangkan <b>skill yang bisa dijual</b> lalu negosiasi/job hopping.`;
+  if (S.cash < livingCost() * 3) return `Dana darurat belum 3 bulan. Target minimal ${rp(livingCost()*3)} cash/deposito sebelum agresif.`;
+  if (savingRate() >= .3) return `Saving rate ${pct(savingRate())}. Ini mesin yang kuat. Sekarang pertahankan sambil menaikkan earning power.`;
+  return `Progress ${pct(targetProgress())} ke ${goalName()}. Spending rate ${pct(spendingRate())}, saving rate ${pct(savingRate())}.`
+}
+
+function render() {
+  if (!S) return renderStart();
+  if (S.over) return renderEnd();
+  const cur = nw(),
+    sp = surplus(),
+    ror = riskOfRuin(),
+    f = freedom(),
+    run = S.lastRun;
+  $('#app').innerHTML = `<div class="top"><div class="age">Umur ${age()}<small>${U.name} · bulan ${S.month}</small></div><div class="muted" style="font-size:.76rem">Target ${goalName()}</div></div><div class="track"><i style="width:${Math.min(100,targetProgress()*100)}%"></i></div><div class="goalrow"><span>${pct(targetProgress())} selesai</span><span>Kurang ${rp(Math.max(0,S.goal-cur))}</span></div><section class="hero"><div class="label">Net worth ${q('wealth')}</div><div class="nw">${rp(cur)}</div><div class="sub muted">Income ${rp(totalIncome())}/bln · Living cost ${rp(livingCost())}/bln · Aset bisa menutup ${pct(f)} hidup</div><canvas id="chart"></canvas><div class="legend"><span><i style="background:var(--amber)"></i>Net worth</span><span><i style="background:var(--line)"></i>Cuma simpan sisa uang</span><span><i style="background:var(--flag)"></i>Target</span></div></section><div class="coach">${coachLine()}</div><div class="scoregrid"><div><div class="k">Spending rate ${q('spend')}</div><div class="v ${spendingRate()>1?'down':spendingRate()<.7?'up':''}">${pct(spendingRate())}</div></div><div><div class="k">Saving rate ${q('save')}</div><div class="v ${savingRate()>=.2?'up':savingRate()<0?'down':''}">${pct(savingRate())}</div></div><div><div class="k">Sisa uang / bln</div><div class="v ${sp>=0?'up':'down'}">${sp>=0?'+':''}${rp(sp)}</div></div><div><div class="k">Jam kerja / minggu</div><div class="v ${hours()>65?'down':''}">${hours()}</div></div><div><div class="k">Stress / impulse</div><div class="v ${S.stress>70?'down':''}">${Math.round(S.stress)} / ${Math.round(S.impulse)}</div></div><div><div class="k">Risk of ruin</div><div class="v ${ror>40?'down':ror<15?'up':''}">${ror}%</div></div></div>${run?`<div class="lastRun"><b>Run terakhir ${run.months} bln:</b> ${run.endNW>=run.startNW?'+':''}${rp(run.endNW-run.startNW)} (${run.growth>=0?'+':''}${pct(run.growth)})</div>`:''}<div class="panel flow"><div class="panelhead"><h2>Cashflow bulanan</h2><small>setelah keputusan terakhir</small></div><table><tr><td>Income kerja / proyek</td><td>${rp(activeIncome())}</td></tr><tr><td>Profit bisnis bulan terakhir</td><td class="up">+${rp(businessIncome())}</td></tr><tr><td>Living cost</td><td class="down">−${rp(livingCost())}</td></tr><tr><td>Cicilan utang umum</td><td class="down">−${rp(generalDebtPay())}</td></tr><tr><td>Cicilan PayLater/kredit</td><td class="down">−${rp(consumerPay())}</td></tr><tr class="total"><td>Sisa</td><td class="${sp>=0?'up':'down'}">${sp>=0?'+':''}${rp(sp)}</td></tr></table></div><div class="runbuttons"><button onclick="startRun(1)">+1 bulan</button><button onclick="startRun(3)">+3 bulan</button><button onclick="startRun(6)">+6 bulan</button><button onclick="startRun(12)">+1 tahun</button></div><div class="panel"><div class="panelhead"><h2>Living cost</h2><button class="chip" onclick="editLifestyle()">Ubah</button></div><div class="breakdown">${Object.entries(S.costs).map(([k,v])=>`<span>${({housing:'Housing',food:'Makan',transport:'Transport / bensin',social:'Nongkrong / makan jalan',health:'Kesehatan / proteksi',other:'Lain-lain'})[k]}</span><b>${rp(v)}</b>`).join('')}<span>Total</span><b>${rp(livingCost())}</b></div></div><div class="sectionTitle"><h2>Naikkan earning power ${q('skill')}</h2><span>Annual raise dasar + skill + negosiasi + job hopping</span></div><div class="panel"><div class="skilltags">${Object.keys(COURSES).map(id=>`<span class="tagpill ${S.skills.includes(COURSES[id].skill)?'got':''}">${S.skills.includes(COURSES[id].skill)?'✓ ':''}${COURSES[id].skill}</span>`).join('')}</div><div class="chips" style="margin-top:10px"><button class="chip" onclick="negotiateRaise()">Negosiasi gaji</button><button class="chip" onclick="seekJobOffer()">Cari job offer</button></div>${S.activeCourses.length?`<div class="muted" style="font-size:.76rem;margin-top:9px">Sedang belajar: ${S.activeCourses.map(c=>COURSES[c.id].n+' ('+c.remain+' bln lagi)').join(', ')}</div>`:''}</div>${Object.entries(COURSES).map(([id,c])=>courseCard(id,c)).join('')}<div class="sectionTitle"><h2>Bangun / beli bisnis</h2><span>margin di sini = asumsi simulasi</span></div>${Object.entries(BIZ).map(([id,b])=>bizOption(id,b)).join('')}${S.businesses.length?`<div class="sectionTitle"><h2>Bisnismu</h2><span>${S.businesses.length} aktif</span></div>${S.businesses.map(b=>bizCard(b)).join('')}`:''}<div class="sectionTitle"><h2>Investasi sisa uang</h2><span>${allocTotal()}% dialokasikan</span></div><div class="presets">${Object.keys(PRESETS).map(p=>`<button class="${S.preset===p?'on':''}" onclick="setPreset('${p}')">${({aman:'Aman',seimbang:'Seimbang',berani:'Berani',likuid:'Likuid'})[p]}</button>`).join('')}</div>${SLIDERS.map(k=>assetRow(k)).join('')}<div class="cashrow"><span>Cash <b>${rp(S.cash)}</b> · dana darurat 3 bln ${rp(livingCost()*3)}</span><button onclick="investCash()">Invest excess cash</button></div>${S.a.properti>0?assetRow('properti'):''}${allDebt()>0?`<div class="panel"><div class="panelhead"><h2>Utang</h2><small>Total ${rp(allDebt())}</small></div>${S.debt>0?`<div class="debtcard">Utang umum ${rp(S.debt)} · cicilan ${rp(generalDebtPay())}/bln <button class="chip" onclick="payDebt()" style="float:right">Bayar semaksimal</button></div>`:''}${S.consumerLoans.map(l=>`<div class="debtcard"><b>${l.label}</b><br>Sisa ${rp(l.balance)} · ${l.remain} bln · ${rp(l.payment)}/bln</div>`).join('')}</div>`:''}<div class="badges">${['100m','250m','500m','1b','skill','biz','debt','save30'].map(id=>`<span class="badge ${S.badges.includes(id)?'got':''}">${S.badges.includes(id)?'✓ ':''}${({'100m':'100 jt','250m':'250 jt','500m':'500 jt','1b':'1 M',skill:'skill',biz:'bisnis',debt:'bebas utang',save30:'save 30%'})[id]}</span>`).join('')}</div><button class="ghost" onclick="confirmReset()">Mulai ulang</button><div class="log">${S.log.map(l=>`<div><b>Bln ${l.m} · ${l.t}</b> — ${l.text}</div>`).join('')}</div>`;
+  drawChart()
+}
+
+function courseCard(id, c) {
+  const got = S.skills.includes(c.skill),
+    active = S.activeCourses.some(x => x.id === id);
+  return `<div class="course"><div class="row"><div><div class="name">${c.n}</div><div class="desc">${c.desc}</div><div class="meta">${rp(c.cost)} · ${c.months} bln · +${c.hours} jam/minggu · market value +${pct(c.boost)}</div></div><button onclick="startCourse('${id}')" ${got||active?'disabled':''}>${got?'Selesai':active?'Belajar':'Ambil kelas'}</button></div></div>`
+}
+
+function bizOption(id, b) {
+  const unlocked = canStartBiz(id);
+  return `<div class="biz"><div class="row"><div><div class="name">${b.n}</div><div class="desc">${b.desc}</div><div class="meta">Modal ${rp(b.capital)} · gross ${pct(b.gross)} · net target ${pct(b.net)} · ±${b.hours} jam/minggu${b.skill?' · butuh '+b.skill:''}</div></div><button onclick="startBusiness('${id}')" ${!unlocked||S.cash<b.capital?'disabled':''}>${unlocked?'Buka':'Locked'}</button></div></div>`
+}
+
+function bizCard(b) {
+  const c = BIZ[b.type];
+  return `<div class="biz"><div class="row"><div><div class="name">${c.n}</div><div class="desc">Nilai bisnis ${rp(b.value)} · omzet bln terakhir ${rp(b.lastRevenue)} · profit ${rp(b.lastProfit)}</div><div class="meta">Umur ${b.age} bln · ${b.manager?'dikelola manager':'founder-operated'}</div></div><button onclick="toggleBizManager('${b.id}')">${b.manager?'Pegang lagi':'Hire manager'}</button></div></div>`
+}
+
+function assetRow(k) {
+  const A = ASSETS[k],
+    v = S.a[k] || 0;
+  if (k === 'properti') return `<div class="arow hot"><div><div class="n">${A.n}</div><div class="d">${A.d}</div><div class="v">Punya ${rp(v)} · estimasi sewa ${rp(v*.004)}/bln <button class="chip" onclick="sell('properti',1)">Jual</button></div></div></div>`;
+  return `<div class="arow ${v>0?'hot':''}"><div><div class="n">${A.n}</div><div class="d">${A.d}</div>${v>0?`<div class="v">Punya ${rp(v)} · <button class="chip" onclick="sell('${k}',.5)">jual ½</button></div>`:''}</div><div class="step"><button onclick="bump('${k}',-10)" ${S.alloc[k]<=0?'disabled':''}>−</button><b>${S.alloc[k]}%</b><button onclick="bump('${k}',10)" ${allocTotal()>=100?'disabled':''}>+</button></div></div>`
+}
+
+function editLifestyle() {
+  modal(`<div class="tag">Living cost</div><h2>Sesuaikan biaya bulanan</h2><p class="eff">Masukkan nilai aktualmu. Ini langsung mengubah spending rate dan target financial freedom.</p>${[['housing','Housing'],['food','Makan'],['transport','Transport / bensin'],['social','Nongkrong / makan jalan'],['health','Kesehatan / proteksi'],['other','Lain-lain']].map(([k,n])=>`<div class="inp"><span style="width:125px;font-size:.8rem;align-self:center">${n}</span><input id="lc-${k}" value="${Math.round(S.costs[k])}" inputmode="numeric"></div>`).join('')}<button class="primary" style="margin-top:12px" onclick="saveLifestyle()">Simpan</button>`)
+}
+
+function saveLifestyle() {
+  for (const k of Object.keys(S.costs)) {
+    const el = $('#lc-' + k),
+      v = parseFloat(el.value.replace(/[^\d]/g, ''));
+    if (!isNaN(v)) S.costs[k] = v
+  }
+  closeModal();
+  save();
+  render()
+}
+
+document.addEventListener('click', e => {
+  const c = e.target.closest && e.target.closest('#modal .choice');
+  if (!c || !S) return;
+  const h = document.querySelector('#modal h2');
+  track('event_choice', {month: S.month, title: h ? h.innerText.slice(0, 60) : '', choice: c.innerText.split('\n')[0].slice(0, 50), nw: nw()});
+});
+function modal(html) {
+  let o = $('#modal');
+  if (!o) {
+    o = document.createElement('div');
+    o.id = 'modal';
+    o.className = 'overlay';
+    document.body.appendChild(o)
+  }
+  o.innerHTML = `<div class="modal pop" role="dialog" aria-modal="true">${html}</div>`
+}
+
+function closeModal() {
+  const o = $('#modal');
+  if (o) o.remove()
+}
+let toastT;
+
+function toast(m) {
+  const t = $('#toast');
+  t.textContent = m;
+  t.style.display = 'block';
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.style.display = 'none', 2500)
+}
+
+function drawChart() {
+  const c = $('#chart');
+  if (!c) return;
+  const ctx = c.getContext('2d'),
+    W = 640,
+    H = 180,
+    dpr = window.devicePixelRatio || 1;
+  c.width = W * dpr;
+  c.height = H * dpr;
+  ctx.scale(dpr, dpr);
+  c.style.height = H + 'px';
+  const hist = S.hist,
+    base = S.baseHist,
+    n = Math.max(hist.length, 2),
+    all = hist.concat(base, [S.goal]);
+  let lo = Math.min(0, ...all),
+    hi = Math.max(...all) * 1.08;
+  if (hi === lo) hi = lo + 1;
+  const X = i => 12 + i / (n - 1) * (W - 24),
+    Y = v => H - 18 - (v - lo) / (hi - lo) * (H - 28);
+  ctx.clearRect(0, 0, W, H);
+  ctx.font = '11px Manrope';
+  ctx.strokeStyle = '#58B368';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(12, Y(S.goal));
+  ctx.lineTo(W - 12, Y(S.goal));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#58B368';
+  ctx.textAlign = 'right';
+  ctx.fillText(goalName(), W - 14, Y(S.goal) - 4);
+  ctx.strokeStyle = '#4A606D';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  base.forEach((v, i) => i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v)));
+  ctx.stroke();
+  ctx.strokeStyle = '#F5B841';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  hist.forEach((v, i) => i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v)));
+  ctx.stroke();
+  const li = hist.length - 1;
+  ctx.fillStyle = '#F5B841';
+  ctx.beginPath();
+  ctx.arc(X(li), Y(hist[li]), 4, 0, 7);
+  ctx.fill();
+  ctx.fillStyle = '#A9B0AF';
+  ctx.textAlign = 'left';
+  ctx.fillText('bln 0', 12, H - 3);
+  ctx.textAlign = 'right';
+  ctx.fillText('bln ' + S.month, W - 12, H - 3)
+}
+
+function confirmReset() {
+  modal(`<div class="tag bad">Reset</div><h2>Mulai ulang game?</h2><p>Save lokal game ini akan dihapus.</p><button class="choice" onclick="store.del('cr2-save');S=null;U=null;obi=0;obLog=[];closeModal();render()"><b>Ya, reset</b></button><button class="choice" onclick="closeModal()"><b>Batal</b></button>`)
+}
+const OB = [{
+  k: 'name',
+  ask: 'Panggil kamu siapa?',
+  type: 'text',
+  ph: 'Nama panggilan'
+}, {
+  k: 'age',
+  ask: 'Umur kamu sekarang?',
+  type: 'num',
+  ph: 'contoh 28',
+  chips: ['22', '27', '32', '38', '45']
+}, {
+  k: 'job',
+  ask: 'Sumber income utama?',
+  type: 'pick',
+  opts: [
+    ['karyawan', 'Karyawan'],
+    ['freelance', 'Freelance'],
+    ['usaha', 'Usaha sendiri'],
+    ['none', 'Belum ada income']
+  ]
+}, {
+  k: 'income',
+  ask: 'Income bersih rata-rata per bulan?',
+  type: 'rp',
+  ph: 'contoh 8 jt',
+  chips: ['4 jt', '7 jt', '12 jt', '20 jt', '35 jt']
+}, {
+  k: 'housing',
+  ask: 'Housing per bulan? Kos, sewa, KPR, kontribusi rumah.',
+  type: 'rp',
+  ph: 'contoh 1,5 jt',
+  chips: ['500 rb', '1,5 jt', '3 jt', '5 jt', '8 jt']
+}, {
+  k: 'food',
+  ask: 'Pola makan paling mirip yang mana?',
+  type: 'pick',
+  opts: [
+    ['cook', 'Mayoritas masak'],
+    ['mixed', 'Campur masak + luar'],
+    ['outside', 'Sering makan luar'],
+    ['delivery', 'Sering delivery']
+  ]
+}, {
+  k: 'transport',
+  ask: 'Transport harian?',
+  type: 'pick',
+  opts: [
+    ['wfh', 'WFH / dekat'],
+    ['motor', 'Motor ±15 km/hari'],
+    ['motor40', 'Motor ±40 km/hari'],
+    ['public', 'Umum + ojol'],
+    ['car15', 'Mobil ±15 km/hari'],
+    ['car40', 'Mobil ±40 km/hari']
+  ]
+}, {
+  k: 'social',
+  ask: 'Nongkrong / makan jalan seberapa sering?',
+  type: 'pick',
+  opts: [
+    ['rare', 'Jarang'],
+    ['weekly', '1×/minggu'],
+    ['twice', '2×/minggu'],
+    ['often', '4×/minggu']
+  ]
+}, {
+  k: 'health',
+  ask: 'Perlindungan kesehatan?',
+  type: 'pick',
+  opts: [
+    ['jkn', 'JKN/BPJS aktif'],
+    ['private', 'Asuransi swasta + JKN'],
+    ['none', 'Belum ada']
+  ]
+}, {
+  k: 'other',
+  ask: 'Pengeluaran rutin lain per bulan? Pulsa, langganan, keluarga, skincare, hobi, dll.',
+  type: 'rp',
+  ph: 'contoh 1 jt',
+  chips: ['500 rb', '1 jt', '2 jt', '4 jt', '8 jt']
+}, {
+  k: 'savings',
+  ask: 'Total cash/tabungan/investasi yang tersedia sekarang?',
+  type: 'rp',
+  ph: 'contoh 20 jt',
+  chips: ['0', '5 jt', '20 jt', '50 jt', '150 jt']
+}, {
+  k: 'debt',
+  ask: 'Total sisa utang sekarang? PayLater, motor, KTA, kartu kredit, dll.',
+  type: 'rp',
+  ph: '0 kalau tidak ada',
+  chips: ['0', '5 jt', '15 jt', '50 jt', '150 jt']
+}];
+
+function renderStart() {
+  const saved = store.get('cr2-save');
+  if (new URLSearchParams(location.search).get('admin') === CONFIG.adminKey) return renderAdmin();
+  if (!U) U = {};
+  const st = OB[obi];
+  let html = `<div class="chat"><h1 style="font-size:1.9rem;margin:10px 0 2px">Compound Race V2</h1><div class="amber" style="font-weight:800;margin-bottom:4px">Road to Rp1 Miliar</div><div class="muted" style="font-size:.8rem;margin-bottom:5px">Karier · living cost · skill · bisnis · investasi · utang · psikologi belanja</div>${saved&&saved.S&&!saved.S.over&&obi===0?`<button class="primary" onclick="loadSave()">Lanjutkan game terakhir</button>`:''}${obLog.map(l=>`<div class="bub me">${l.q}</div><div class="bub you">${l.a}</div>`).join('')}`;
+  if (st) {
+    const ask = typeof st.ask === 'function' ? st.ask(U) : st.ask;
+    html += `<div class="muted" style="font-size:.75rem;margin-top:4px">Pertanyaan ${obi+1} dari ${OB.length}</div><div class="bub me pop">${ask}</div>`;
+    if (st.type === 'pick') html += `<div class="chips">${st.opts.map(o=>`<button class="chip" onclick="obAnswer('${o[0]}','${o[1]}')">${o[1]}</button>`).join('')}</div>`;
+    else {
+      if (st.chips) html += `<div class="chips">${st.chips.map(c=>`<button class="chip" onclick="obAnswer('${c}','${c}')">${c}</button>`).join('')}</div>`;
+      html += `<div class="inp"><input id="obin" type="${st.type==='num'?'number':'text'}" inputmode="${st.type==='text'?'text':'decimal'}" placeholder="${st.ph||''}"><button onclick="obSubmit()">OK</button></div>`
+    }
+  } else html += revealHTML();
+  html += '</div>';
+  $('#app').innerHTML = html;
+  const inp = $('#obin');
+  if (inp) {
+    inp.focus();
+    inp.onkeydown = e => {
+      if (e.key === 'Enter') obSubmit()
+    }
+  }
+  window.scrollTo(0, document.body.scrollHeight)
+}
+
+function loadSave() {
+  const x = store.get('cr2-save');
+  if (x) {
+    S = x.S;
+    U = x.U;
+    obi = x.obi || OB.length;
+    obLog = x.obLog || [];
+    render()
+  }
+}
+
+function obSubmit() {
+  const v = $('#obin').value.trim();
+  if (!v) return;
+  obAnswer(v, v)
+}
+
+function obAnswer(v, label) {
+  const st = OB[obi];
+  let val = v;
+  if (st.type === 'num') {
+    val = parseInt(v);
+    if (isNaN(val) || val < 16 || val > 75) return toast('Isi umur 16–75.')
+  }
+  if (st.type === 'rp') {
+    val = parseRp(v);
+    if (val === null) return toast('Tulis angka, misalnya 4,5 jt');
+    label = rp(val)
+  }
+  if (st.type === 'text') {
+    val = v.slice(0, 20).replace(/[<>]/g, '');
+    label = val
+  }
+  U[st.k] = val;
+  obLog.push({
+    q: typeof st.ask === 'function' ? st.ask(U) : st.ask,
+    a: label
+  });
+  obi++;
+  renderStart()
+}
+
+function onboardingLiving() {
+  return U.housing + FOOD[U.food].cost + TRANSPORT[U.transport].cost + SOCIAL[U.social].cost + HEALTH[U.health].premium + U.other
+}
+
+function revealHTML() {
+  const exp = onboardingLiving(),
+    dp = Math.max(U.debt * .012, U.debt * .02),
+    sp = U.income - exp - dp,
+    sr = sp / Math.max(U.income, 1),
+    goal = goalFor(U.savings - U.debt);
+  return `<div class="reveal pop"><div class="muted">Starting snapshot</div><div class="big">${rp(U.savings-U.debt)}</div><div class="breakdown" style="margin-top:8px"><span>Income</span><b>${rp(U.income)}/bln</b><span>Living cost</span><b>${rp(exp)}/bln</b><span>Debt payment awal</span><b>${rp(dp)}/bln</b><span>Saving rate awal</span><b class="${sr>=.2?'up':sr<0?'down':''}">${pct(sr)}</b><span>Race target</span><b>${rp(goal)}</b></div><p style="margin-top:10px;line-height:1.5">Game tidak berhenti setelah 10 tahun. Kamu jalan sampai mencapai target, bangkrut, atau 30 tahun simulasi.</p></div><label class="consent"><input id="consent" type="checkbox" checked> Simpan jawaban di browser ini untuk melanjutkan game. Data tidak terkirim ke server kecuali CONFIG.endpoint diisi.</label><button class="primary" onclick="U.consent=$('#consent').checked;startGame()">Mulai Road to ${rp(goal)}</button><button class="ghost" onclick="obi=0;obLog=[];U={};renderStart()">Isi ulang</button>`
+}
+
+function renderEnd() {
+  if (!S) return renderStart();
+  const cur = nw(),
+    won = S.won,
+    ruin = S.ruin;
+  let v = won ? 'BILLIONAIRE' : ruin ? 'BANGKRUT' : 'TIME LIMIT',
+    cls = won ? 'owner' : ruin ? 'ruin' : '',
+    why = won ? `Kamu mencapai ${goalName()} dalam ${Math.floor(S.month/12)} tahun ${S.month%12} bulan.` : ruin ? 'Utang dan cashflow tidak lagi tertutup oleh aset dan earning power.' : '30 tahun simulasi selesai sebelum target tercapai.';
+  $('#app').innerHTML = `<div class="end"><div class="muted" style="margin-top:15px">${U.name} · umur ${age()} · bulan ${S.month}</div><div class="verdict ${cls}">${v}</div><p>${why}</p><canvas id="chart"></canvas><table class="endtable"><tr><td>Net worth akhir</td><td>${rp(cur)}</td></tr><tr><td>Target</td><td>${goalName()}</td></tr><tr><td>Income kerja</td><td>${rp(activeIncome())}/bln</td></tr><tr><td>Profit bisnis terakhir</td><td>${rp(businessIncome())}/bln</td></tr><tr><td>Living cost</td><td>${rp(livingCost())}/bln</td></tr><tr><td>Saving rate</td><td>${pct(savingRate())}</td></tr><tr><td>Total utang</td><td>${rp(allDebt())}</td></tr><tr><td>Skill</td><td>${S.skills.length}</td></tr><tr><td>Bisnis</td><td>${S.businesses.length}</td></tr></table><div class="coach">${won?'Yang paling besar pengaruhnya biasanya bukan satu saham yang meledak, tapi kombinasi earning power, saving rate, kepemilikan bisnis/aset, dan waktu.':'Cek log: apakah masalah utamanya income stagnan, living cost terlalu cepat naik, atau utang konsumtif.'}</div>${profileHTML()}${won&&S.goal<100*M?`<button class="primary" onclick="nextGoal()">Lanjut balapan ke ${rp(S.goal*10)}</button>`:''}<button class="${won&&S.goal<100*M?'ghost':'primary'}" onclick="track('replay',{});store.del('cr2-save');S=null;U=null;obi=0;obLog=[];render()">Main lagi</button></div>`;
+  drawChart();
+  track('game_end', {
+    won,
+    ruin,
+    months: S.month,
+    nw: cur
+  })
+}
+
+function renderAdmin() {
+  const ev = store.get('cr2-events') || [];
+  $('#app').innerHTML = `<h1 style="margin:20px 0 10px">Compound Race V2 · Local Data</h1><p class="muted">${ev.length} event tersimpan di browser ini.</p><button class="primary" onclick="const b=new Blob([JSON.stringify(${JSON.stringify(ev).replace(/</g,'\\u003c')})],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='compound-race-v2-events.json';a.click()">Unduh JSON</button><button class="ghost" onclick="store.del('cr2-events');location.reload()">Hapus event lokal</button><button class="ghost" onclick="location.href=location.pathname">Kembali</button>`
+}
+render();
+function nextGoal() {
+  track('next_goal', {from: S.goal, to: S.goal * 10, month: S.month});
+  S.goal *= 10; S.won = false; S.over = false;
+  pushLog('Target baru', `Target dinaikkan ke ${rp(S.goal)}. Balapan lanjut.`);
+  save(); render();
+}
+/* ===== profil pemain + lead capture ===== */
+function riskProfile() {
+  const a = S.alloc || {}, agg = (a.saham || 0) + (S.businesses.length ? 30 : 0), cons = (a.cash || 0) + (a.emas || 0);
+  const p = agg >= 50 ? 'Agresif' : (cons >= 60 || agg < 20) ? 'Konservatif' : 'Moderat';
+  const n = [];
+  if (S.consumerLoans && S.consumerLoans.length) n.push('masih memakai PayLater/kredit konsumtif');
+  if (S.beh && S.beh.health > 2) n.push('sering kena biaya kesehatan');
+  if (S.skills.length >= 2) n.push('investasi ke skill');
+  if (S.businesses.length) n.push('nyaman memiliki bisnis nyata');
+  if (S.impulse > 60) n.push('impuls belanja tinggi');
+  if (savingRate() >= .3) n.push('saving rate di atas 30%');
+  return {p, notes: n};
+}
+function endStats() {
+  const r = riskProfile();
+  return {nw: nw(), goal: S.goal, won: S.won, ruin: S.ruin, month: S.month, inc: S.inc, living: livingCost(), debt: allDebt(), savingRate: savingRate(), skills: S.skills, biz: S.businesses.map(b => b.type), profile: r.p, notes: r.notes, stress: S.stress, impulse: S.impulse, u: {age: U.age, job: U.job, income: U.income, savings: U.savings, debt: U.debt, health: U.health, consent: U.consent}};
+}
+function profileHTML() {
+  const r = riskProfile();
+  return `<div class="panel" style="margin:14px 0"><div class="muted" style="font-size:.78rem">Cara kamu mengambil keputusan uang</div><div style="font-size:1.4rem;font-weight:800;margin:2px 0 6px">${r.p}</div><p style="font-size:.9rem;line-height:1.5">${r.notes.length?'Dari '+S.month+' bulan keputusanmu: '+r.notes.join(', ')+'.':'Kamu bermain aman dan konsisten.'} Ini cermin, bukan tes. Angka aslimu (${rp(U.income)} masuk, ${rp(U.savings)} tabungan) bisa dijalankan dengan cara yang sama.</p>${U.consent!==false?leadHTML():''}</div>`;
+}
+function leadHTML() {
+  return `<div style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px"><b>Mau versi nyatanya?</b><div class="muted" style="font-size:.85rem;margin:4px 0 8px">${CONFIG.brand} kirim rencana 12 bulan pertama sesuai angkamu. Gratis, lewat WhatsApp.</div><div class="inp"><input id="wa" type="tel" inputmode="tel" placeholder="08xx nomor WhatsApp"><button onclick="submitLead()">Kirim</button></div><label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--dim);margin-top:8px"><input type="checkbox" id="lc" style="width:18px;height:18px;accent-color:var(--amber)"> Saya setuju dihubungi ${CONFIG.brand} soal rencana ini. Bisa berhenti kapan saja.</label></div>`;
+}
+function submitLead() {
+  const wa = $('#wa').value.replace(/\D/g, '');
+  if (wa.length < 9) return toast('Nomor WA belum lengkap.');
+  if (!$('#lc').checked) return toast('Centang persetujuan dulu.');
+  track('lead', {wa, name: U.name, ...endStats()});
+  if (CONFIG.waNumber) {
+    const msg = encodeURIComponent(`Halo ${CONFIG.brand}, saya ${U.name} (${age()}). Hasil Compound Race: net worth ${rp(nw())}, profil ${riskProfile().p}. Minta rencana 12 bulan.`);
+    location.href = `https://wa.me/${CONFIG.waNumber}?text=${msg}`;
+  } else $('#wa').parentElement.innerHTML = '<div class="up" style="font-weight:700;padding:8px 0">Tersimpan. Kami hubungi kamu.</div>';
+}
+
+</script>
+</body>
+</html>
