@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compound Race — Kapan uangmu bisa membayar hidupmu?</title>
+<meta name="description" content="Masukkan kondisi keuanganmu sekarang. Mainkan 10 tahun ke depan dalam 10 menit. Lihat kapan asetmu bisa membayar hidupmu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--asphalt:#1E2A32;--panel:#27363F;--panel-2:#2F414C;--line:#3B4F5B;--bone:#EDE6D6;--dim:#A9B0AF;--amber:#F5B841;--signal:#E4572E;--flag:#58B368;--r:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--asphalt);color:var(--bone);font-family:Manrope,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{max-width:600px;margin:0 auto;padding:14px 14px 48px}
+.muted{color:var(--dim)}.up{color:var(--flag)}.down{color:var(--signal)}.amber{color:var(--amber)}
+h1{font-weight:800;letter-spacing:-.02em;line-height:1.05}
+h2{font-weight:800;font-size:1.1rem;letter-spacing:-.01em}
+.q{position:relative;display:inline-block;width:17px;height:17px;border-radius:50%;border:1px solid var(--dim);color:var(--dim);font-size:.7rem;line-height:15px;text-align:center;margin-left:5px;vertical-align:2px;font-weight:700}
+.primary{width:100%;background:var(--amber);color:#1E2A32;font-weight:800;font-size:1.05rem;padding:16px;border-radius:var(--r);letter-spacing:-.01em}
+.primary:active{transform:translateY(1px)}.primary:disabled{opacity:.4}
+.ghost{width:100%;padding:12px;border-radius:var(--r);border:1px solid var(--line);color:var(--dim);font-weight:600;margin-top:8px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* onboarding chat */
+.chat{display:flex;flex-direction:column;gap:10px;padding-top:10px}
+.bub{max-width:88%;padding:12px 14px;border-radius:14px;line-height:1.5;font-size:1rem}
+.bub.me{align-self:flex-start;background:var(--panel);border-bottom-left-radius:4px}
+.bub.you{align-self:flex-end;background:var(--amber);color:#1E2A32;font-weight:700;border-bottom-right-radius:4px}
+.bub b{font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:600;font-size:.92rem}
+.chip:hover{border-color:var(--amber)}
+.inp{display:flex;gap:8px;margin-top:8px}
+.inp input{flex:1;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:1.05rem;font-weight:700;min-width:0}
+.inp input::placeholder{color:var(--dim);font-weight:500}
+.inp button{background:var(--amber);color:#1E2A32;font-weight:800;padding:0 18px;border-radius:var(--r)}
+.reveal{background:var(--panel);border-radius:12px;padding:18px 16px;margin-top:14px;border-left:4px solid var(--amber)}
+.reveal .big{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin:4px 0}
+.reveal p{line-height:1.55;margin-top:8px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--dim);line-height:1.45;margin:14px 0 10px}
+.consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--amber)}
+
+/* game */
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.top .age{font-size:1.9rem;font-weight:800;letter-spacing:-.03em}
+.top .age small{font-size:.9rem;font-weight:600;color:var(--dim);margin-left:6px}
+.track{height:10px;background:var(--panel);border-radius:999px;overflow:hidden;position:relative}
+.track i{display:block;height:100%;background:var(--amber);transition:width .3s}
+.goal{margin:16px 0 4px}
+.goal .lbl{display:flex;justify-content:space-between;font-size:.85rem;color:var(--dim)}
+.goal .bar{height:22px;background:var(--panel);border-radius:6px;overflow:hidden;position:relative;margin-top:6px}
+.goal .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--flag),#8BD48F);transition:width .4s}
+.goal .bar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:var(--bone);text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.hero{margin:14px 0 8px}
+.hero .nw{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.hero .sub{margin-top:5px;font-size:.9rem}
+canvas{width:100%;height:170px;display:block;margin-top:10px}
+.legend{display:flex;gap:14px;font-size:.75rem;color:var(--dim);margin-top:4px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px;border-radius:2px}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin:12px 0}
+.board div{background:var(--panel);padding:10px 12px}
+.board .k{font-size:.72rem;color:var(--dim)}.board .v{font-size:1.2rem;font-weight:800;margin-top:2px}
+.market{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.market span{font-size:.78rem;background:var(--panel);border-radius:999px;padding:5px 10px;font-weight:600}
+.coach{background:var(--panel);border-left:4px solid var(--amber);border-radius:var(--r);padding:12px 14px;line-height:1.5;margin:12px 0;font-size:.95rem}
+.coach b{color:var(--amber)}
+.flow{background:var(--panel);border-radius:var(--r);padding:12px 14px;margin:12px 0}
+.flow table{width:100%;border-collapse:collapse}.flow td{padding:3px 0;font-size:.92rem}.flow td:last-child{text-align:right;font-weight:600}
+.flow tr.total td{border-top:1px solid var(--line);padding-top:8px;font-weight:800;font-size:1rem}
+.strat h2{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 8px}
+.strat h2 span{font-size:.85rem;font-weight:600;color:var(--dim)}
+.presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.presets button{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:9px 4px;font-size:.8rem;font-weight:700}
+.presets button.on{border-color:var(--amber);color:var(--amber)}
+.arow{background:var(--panel);border-radius:var(--r);padding:11px 14px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-left:4px solid var(--line)}
+.arow.hot{border-left-color:var(--amber)}
+.arow .n{font-weight:700}.arow .d{font-size:.78rem;color:var(--dim);margin-top:2px;line-height:1.4}
+.arow .v{font-size:.8rem;margin-top:3px}
+.step{display:flex;align-items:center;gap:2px}
+.step button{width:36px;height:36px;border-radius:6px;background:var(--panel-2);border:1px solid var(--line);font-weight:800;font-size:1.1rem}
+.step button:disabled{opacity:.3}
+.step b{width:44px;text-align:center;font-size:1rem}
+.cashrow{display:flex;justify-content:space-between;align-items:center;background:var(--panel-2);border-radius:var(--r);padding:10px 14px;margin:8px 0 12px;font-size:.9rem}
+.cashrow button{background:var(--amber);color:#1E2A32;font-weight:800;padding:8px 12px;border-radius:6px;font-size:.85rem}
+.acts{display:flex;gap:8px;margin:10px 0}
+.acts .primary{padding:14px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.badge{font-size:.78rem;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 11px;color:var(--dim)}
+.badge.got{border-color:var(--flag);color:var(--bone)}
+.log{margin-top:14px;font-size:.85rem;color:var(--dim);line-height:1.55}
+.log div{padding:6px 0;border-top:1px dashed var(--line)}.log b{color:var(--bone)}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(14,20,25,.8);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+@media(min-width:600px){.overlay{align-items:center;padding:20px}}
+.modal{background:var(--panel);width:100%;max-width:560px;border-radius:14px 14px 0 0;padding:20px 18px 26px;max-height:92vh;overflow:auto}
+@media(min-width:600px){.modal{border-radius:14px}}
+.modal .tag{font-size:.8rem;font-weight:700;color:var(--amber);margin-bottom:6px}
+.modal .tag.bad{color:var(--signal)}.modal .tag.good{color:var(--flag)}
+.modal h2{font-size:1.35rem;margin-bottom:8px}
+.modal p{line-height:1.55;margin-bottom:10px}
+.modal .eff{font-size:.85rem;color:var(--dim);margin-bottom:12px}
+.choice{display:block;width:100%;text-align:left;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:8px}
+.choice b{display:block}.choice span{display:block;font-size:.82rem;color:var(--dim);margin-top:2px}
+.choice:disabled{opacity:.4}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
+#toast{position:fixed;left:50%;top:14px;transform:translateX(-50%);background:var(--bone);color:var(--asphalt);padding:10px 16px;border-radius:8px;font-weight:700;font-size:.9rem;z-index:20;max-width:92vw;display:none}
+#toast.badge-t{background:var(--flag);color:#fff}
+/* end */
+.end .verdict{font-size:2.6rem;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:6px 0}
+.end .verdict.owner{color:var(--amber)}.end .verdict.ruin{color:var(--signal)}
+.endtable{width:100%;border-collapse:collapse;background:var(--panel);border-radius:var(--r);overflow:hidden;margin:14px 0}
+.endtable td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:.92rem}.endtable tr:last-child td{border-bottom:0}.endtable td:last-child{text-align:right;font-weight:800}
+.lesson{border-left:4px solid var(--amber);padding:10px 14px;font-size:1.02rem;line-height:1.5;font-weight:600;margin:16px 0}
+.profile{background:var(--panel);border-radius:12px;padding:16px;margin:14px 0}
+.profile .t{font-size:.8rem;color:var(--dim)}.profile .p{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin:2px 0 6px}
+.profile p{line-height:1.5;font-size:.92rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="toast"></div>
+<script>
+/* ============ CONFIG — isi sebelum deploy ============ */
+const CONFIG={
+  brand:'Deprojekt Studio',
+  endpoint:'',            // URL webhook (Google Apps Script / n8n / Supabase). Kosong = data hanya tersimpan di browser + bisa diekspor.
+  waNumber:'',            // contoh '6281234567890' → tombol WA di akhir. Kosong = form kontak saja.
+  adminKey:'race'         // buka ?admin=race untuk ekspor data lokal
+};
+/* ============ util ============ */
+const $=s=>document.querySelector(s);
+const JT=1e6,M=1e9,TURNS=120;
+const rp=n=>{const a=Math.abs(n);let s;if(a>=M)s=(a/M).toLocaleString('id-ID',{maximumFractionDigits:2})+' M';else if(a>=JT)s=(a/JT).toLocaleString('id-ID',{maximumFractionDigits:a<10*JT?1:0})+' jt';else s=Math.round(a/1e3).toLocaleString('id-ID')+' rb';return (n<0?'−':'')+'Rp'+s;};
+const pct=n=>(n*100).toLocaleString('id-ID',{maximumFractionDigits:1})+'%';
+const randn=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+const parseRp=s=>{s=String(s).toLowerCase().replace(/rp|\s/g,'').replace(/\./g,'').replace(',','.');let m=1;if(/jt|juta/.test(s))m=JT;else if(/m$|miliar|milyar/.test(s))m=M;else if(/rb|ribu|k$/.test(s))m=1e3;const n=parseFloat(s.replace(/[^\d.]/g,''));if(isNaN(n))return null;let v=n*m;if(m===1&&v<1000)v*=JT;return v;};
+
+/* ============ analytics ============ */
+const AN={events:[],send(type,data){const e={t:Date.now(),type,...data,sid:S?S.sid:null};this.events.push(e);const all=store.get('cr-events')||[];all.push(e);store.set('cr-events',all.slice(-2000));
+  if(CONFIG.endpoint){try{fetch(CONFIG.endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(e)})}catch(x){}}}};
+function track(type,data={}){AN.send(type,data);}
+
+/* ============ glossary (bahasa warung) ============ */
+const G={
+ surplus:['Sisa uang','Uang yang tersisa tiap bulan setelah semua kebutuhan dan cicilan dibayar. Ini bahan bakar mesinmu. Kalau minus, kamu makan tabungan.'],
+ pasif:['Uang masuk tanpa kerja','Uang yang bisa kamu ambil dari aset tiap bulan tanpa asetnya habis: bunga tabungan, bagi hasil, sewa kos, untung bisnis, atau menjual sebagian kecil emas/saham yang sudah tumbuh.'],
+ bebas:['Angka Bebas','Jumlah aset yang, kalau dipunya, uang masuknya cukup buat bayar seluruh hidupmu tiap bulan. Setelah itu, kerja jadi pilihan—bukan kewajiban.'],
+ kekayaan:['Total kekayaan','Semua yang kamu punya (tabungan, emas, reksadana, bisnis, properti) dikurangi utang.'],
+ compound:['Bunga berbunga','Untung yang kamu dapat ikut menghasilkan untung lagi. Awalnya lambat sekali. Lalu tiba-tiba cepat. Waktu adalah bahannya.'],
+ risiko:['Risiko bangkrut','Perkiraan seberapa besar kemungkinan mesinmu rusak: terlalu banyak utang, terlalu banyak di aset yang bisa anjlok, atau tidak ada dana darurat.'],
+ darurat:['Dana darurat','Tabungan yang bisa diambil kapan saja, idealnya 3–6 bulan pengeluaran. Tanpa ini, satu musibah = utang.'],
+ haircut:['Jual rugi','Aset yang tidak likuid (stok, properti) kalau dijual buru-buru harganya dipotong.'],
+};
+const q=k=>`<button class="q" onclick="event.stopPropagation();gloss('${k}')" aria-label="Apa ini?">?</button>`;
+function gloss(k){const g=G[k];modal(`<div class="tag">Apa itu</div><h2>${g[0]}</h2><p>${g[1]}</p><button class="primary" onclick="closeModal()">Ngerti</button>`);track('gloss',{k});}
+
+/* ============ assets ============ */
+const ASSETS={
+  tabung:{n:'Tabungan & deposito',d:'Aman. Bunga kecil (0,4%/bln). Bisa diambil kapan saja. Ini dana daruratmu.',mu:0,yld:0.004,sig:0,liq:1,hrs:0},
+  emas:{n:'Emas',d:'Nilainya naik pelan (≈0,5%/bln), jarang anjlok, gampang dijual. Bisa dijual sedikit-sedikit untuk biaya hidup.',mu:0.001,yld:0.004,sig:0.02,liq:0.97,hrs:0},
+  reksa:{n:'Reksadana',d:'Kamu titip uang ke pengelola yang belikan banyak saham sekaligus. ≈0,8%/bln, bisa turun 20% saat pasar jatuh.',mu:0.003,yld:0.005,sig:0.03,liq:1,hrs:0},
+  saham:{n:'Saham',d:'Beli potongan kecil perusahaan. Rata-rata ≈1,9%/bln, tapi bisa −35% dalam sebulan. Perlu kuat mental.',mu:0.013,yld:0.006,sig:0.08,liq:1,hrs:0},
+  bisnis:{n:'Jualan / bisnis kecil',d:'Modal jadi stok, stok jadi untung ≈3–4%/bln. Butuh waktumu: 10 jam/minggu per Rp100 jt. Stok bisa nyangkut.',mu:0.012,yld:0.025,sig:0.06,liq:0.7,hrs:10},
+  properti:{n:'Kos-kosan / properti',d:'Sewa masuk tiap bulan + harga naik. Hanya bisa dibeli lewat tawaran yang muncul. Jual buru-buru = rugi 15%.',mu:0.006,yld:0.006,sig:0.01,liq:0.85,hrs:1},
+};
+const SLIDERS=['tabung','emas','reksa','saham','bisnis'];
+const PRESETS={aman:{tabung:60,emas:20,reksa:20,saham:0,bisnis:0},seimbang:{tabung:30,emas:10,reksa:40,saham:20,bisnis:0},berani:{tabung:10,emas:0,reksa:30,saham:40,bisnis:20},bisnis:{tabung:20,emas:0,reksa:20,saham:0,bisnis:60}};
+const LOAN=0.012,CREEP=0.0025;
+
+/* ============ state ============ */
+let S=null,U=null; // U = profil onboarding
+function freedomNumber(exp){return exp/0.006;}
+function startGame(){
+  const inc=U.income,exp=U.exp;
+  S={sid:uid(),u:U,month:0,cash:U.savings,inc,exp,debt:U.debt,jobHours:U.job==='none'?0:U.job==='usaha'?55:45,quit:U.job==='none',
+    a:{tabung:0,emas:0,reksa:0,saham:0,bisnis:0,properti:0},alloc:{...PRESETS.seimbang},preset:'seimbang',
+    life:65,manager:false,streak:0,hist:[],base:[],baseline:U.savings-U.debt,log:[],lastNW:null,over:false,ruin:false,badges:[],
+    tempIncome:0,tempMonths:0,lastMkt:null,freeMonth:null,beh:{crashSell:0,crashBuy:0,lifestyle:0,debtPay:0,events:0},autoInvest:true,startups:[]};
+  S.hist.push(nw());S.base.push(S.baseline);
+  pushLog('Mulai','Halo '+U.name+'. Umur '+U.age+'. Kekayaan awal '+rp(nw())+'. Angka Bebas kamu '+rp(freedomNumber(exp))+'. Balapan dimulai.');
+  track('game_start',{profile:U});save();render();
+}
+const save=()=>store.set('cr-save',{S,U});
+function nw(){return S.cash+Object.values(S.a).reduce((x,y)=>x+y,0)-S.debt;}
+function yieldOf(k){let y=ASSETS[k].yld;if(k==='bisnis'&&S.manager)y-=0.012;return y;}
+function passive(){let p=0;for(const k in S.a)p+=S.a[k]*yieldOf(k);return p;}
+function hours(){let h=S.quit?0:S.jobHours;h+=S.a.bisnis/(100*JT)*(S.manager?2:10)+S.a.properti/(100*JT);return Math.round(h);}
+function freedom(){return passive()/S.exp;}
+function activeIncome(){return (S.quit?0:S.inc)+(S.tempMonths>0?S.tempIncome:0);}
+function debtPay(){return S.debt<=0?0:Math.min(S.debt,Math.max(S.debt*LOAN,S.debt*0.02));}
+function surplus(){return activeIncome()+passive()-S.exp-debtPay();}
+function age(){return U.age+Math.floor(S.month/12);}
+function riskOfRuin(){const tot=Object.values(S.a).reduce((x,y)=>x+y,0)+S.cash;if(tot<=0)return 90;
+  const risky=(S.a.saham*.5+S.a.bisnis*.4+S.a.reksa*.15)/tot,lev=S.debt/Math.max(nw(),1),buf=(S.cash+S.a.tabung)/Math.max(S.exp,1),cf=surplus()<0?15:0;
+  return Math.round(clamp(risky*55+clamp(lev,0,3)*12-clamp(buf,0,12)*2.5+cf+4,1,95));}
+function pushLog(t,m){S.log.unshift({m:S.month,t,text:m});S.log=S.log.slice(0,25);}
+function allocTotal(){return SLIDERS.reduce((x,k)=>x+S.alloc[k],0);}
+
+/* ============ actions ============ */
+function setPreset(p){S.alloc={...PRESETS[p]};S.preset=p;track('preset',{p});render();}
+function bump(k,d){const t=allocTotal();if(d>0&&t>=100)return;S.alloc[k]=clamp(S.alloc[k]+d,0,100);S.preset='custom';render();}
+function investCash(){if(S.cash<=0)return;const t=allocTotal();if(!t)return toast('Atur dulu strateginya di bawah.');const c=S.cash;for(const k of SLIDERS){const x=c*S.alloc[k]/100;S.cash-=x;S.a[k]+=x;}track('invest_cash',{amt:c,alloc:S.alloc});toast(rp(c-S.cash)+' masuk ke aset.');render();}
+function sell(k,frac){const v=S.a[k]*frac;if(v<=0)return;const got=v*ASSETS[k].liq;S.a[k]-=v;S.cash+=got;track('sell',{k,frac});if(ASSETS[k].liq<1)pushLog('Jual',ASSETS[k].n+' dijual '+rp(v)+', dapat '+rp(got)+'.');render();}
+function payDebt(amt){if(amt==='all')amt=Math.min(S.cash,S.debt);amt=Math.min(amt,S.cash,S.debt);if(amt<=0)return;S.cash-=amt;S.debt-=amt;S.beh.debtPay++;track('pay_debt',{amt});render();}
+function toggleManager(){S.manager=!S.manager;track('manager',{on:S.manager});pushLog('Tim',S.manager?'Kamu gaji orang buat pegang bisnis. Waktumu kembali, untung turun sedikit.':'Kamu pegang bisnis sendiri lagi.');render();}
+function quitJob(){S.quit=true;track('quit_job',{month:S.month,freedom:freedom()});pushLog('Berhenti kerja','Gaji '+rp(S.inc)+'/bln hilang. Waktumu kembali 100%.');render();}
+function toggleAuto(){S.autoInvest=!S.autoInvest;render();}
+
+/* ============ engine ============ */
+function runMonth(){
+  if(S.over)return null;
+  const act=activeIncome(),pas=passive(),dp=debtPay(),interest=S.debt*LOAN;
+  const sp=act+pas-S.exp-dp;
+  S.cash+=sp;S.debt-=Math.max(dp-interest,0);if(S.debt<1)S.debt=0;if(S.tempMonths>0)S.tempMonths--;
+  S.baseline+=act-S.exp-dp;
+  // auto-invest surplus per strategy
+  if(S.autoInvest&&sp>0&&S.cash>0){const c=Math.min(sp,S.cash);for(const k of SLIDERS){const x=c*S.alloc[k]/100;S.cash-=x;S.a[k]+=x;}}
+  // market
+  const mkt={};for(const k in S.a){const A=ASSETS[k];const r=A.mu+A.sig*randn();mkt[k]=r;if(S.a[k]>0)S.a[k]*=1+r;}
+  S.lastMkt=mkt;
+  S.startups=S.startups.filter(st=>{if(S.month-st.m>=24){const u=Math.random(),mult=u<0.6?0:u<0.9?2:10;S.cash+=st.amt*mult;pushLog(mult?'Startup untung':'Startup gagal',mult?'Uang '+rp(st.amt)+' di startup teman balik ×'+mult+' → '+rp(st.amt*mult)+'.':'Startup teman tutup. '+rp(st.amt)+' hilang.');return false;}return true;});
+  S.month++;S.exp*=1+CREEP;
+  if(S.month%12===0&&!S.quit)S.inc*=U.job==='karyawan'?1.06:1.04;
+  const h=hours();if(h>75)S.life=clamp(S.life-3,0,100);else if(h<30&&freedom()>=1)S.life=clamp(S.life+1,0,100);
+  if(S.cash<0)emergency();
+  const cur=nw();S.streak=(S.lastNW!==null&&cur>=S.lastNW)?S.streak+1:0;S.lastNW=cur;S.hist.push(cur);S.base.push(S.baseline);
+  if(freedom()>=1&&!S.freeMonth){S.freeMonth=S.month;}
+  checkBadges();
+  if(S.ruin||S.month>=TURNS){S.over=true;track('game_end',endStats());save();return 'end';}
+  return pickEvent();
+}
+function nextMonth(n=1){
+  const before=nw();let ev=null,ran=0;
+  for(let i=0;i<n;i++){ev=runMonth();ran++;if(ev)break;}
+  save();render();animateNW(before,nw());
+  if(ev==='end')return renderEnd();
+  if(S.month%12===0&&ran>0&&(n===1||!ev)){return yearEnd(ev);}
+  if(ev)showEvent(ev);
+}
+function emergency(){let need=-S.cash;for(const k of['tabung','emas','reksa','saham']){if(need<=0)break;const take=Math.min(S.a[k],need/ASSETS[k].liq);S.a[k]-=take;S.cash+=take*ASSETS[k].liq;need=-S.cash;}
+  if(S.cash<0){const loan=-S.cash*1.05;S.debt+=loan;S.cash=0;S.life=clamp(S.life-8,0,100);pushLog('Kehabisan uang','Kamu terpaksa ngutang '+rp(loan)+' bunga 14%/thn. Tanpa dana darurat, musibah = utang.');track('emergency_loan',{loan});}
+  const cap=Object.values(S.a).reduce((x,y)=>x+y,0)+activeIncome()*12;if(S.debt>cap*1.5&&S.debt>50*JT){S.ruin=true;pushLog('Bangkrut','Utang '+rp(S.debt)+' tidak tertutup aset maupun penghasilan. Mesin berhenti.');}}
+
+/* ============ badges ============ */
+const BADGES=[
+ {id:'surplus',n:'Sisa uang pertama',c:()=>surplus()>0},
+ {id:'darurat',n:'Dana darurat 3 bulan',c:()=>S.cash+S.a.tabung>=S.exp*3},
+ {id:'listrik',n:'Aset bayar tagihan listrik',c:()=>passive()>=500e3},
+ {id:'100jt',n:'Rp100 jt pertama',c:()=>nw()>=100*JT},
+ {id:'q',n:'Aset bayar ¼ hidupmu',c:()=>freedom()>=.25},
+ {id:'half',n:'Aset bayar ½ hidupmu',c:()=>freedom()>=.5},
+ {id:'utang',n:'Bebas utang',c:()=>S.debt===0&&U.debt>0},
+ {id:'1m',n:'Rp1 miliar',c:()=>nw()>=M},
+ {id:'merdeka',n:'MERDEKA — aset bayar 100% hidupmu',c:()=>freedom()>=1},
+];
+function checkBadges(){for(const b of BADGES){if(!S.badges.includes(b.id)&&b.c()){S.badges.push(b.id);track('badge',{id:b.id,month:S.month});setTimeout(()=>toast('🏁 '+b.n,true),300);pushLog('Pencapaian',b.n+'.');}}}
+
+/* ============ events ============ */
+const EV=[
+ {id:'crash',w:5,tag:'Pasar',cls:'bad',t:'Pasar saham jatuh',p:'Saham −35%, reksadana −20%. Grup WA ramai. Semua orang panik jual.',
+  pre:()=>{S.a.saham*=.65;S.a.reksa*=.8;},cond:()=>S.a.saham+S.a.reksa>5*JT,
+  ch:[{b:'Diam saja',s:'Biasanya pulih 1–2 tahun. Yang rugi cuma yang jual.',f:()=>{}},
+      {b:'Beli lagi pakai separuh cash',s:'Beli saat orang lain takut. Butuh nyali.',f:()=>{const x=S.cash*.5;S.cash-=x;S.a.saham+=x*1.1;S.beh.crashBuy++;},ok:()=>S.cash>5*JT},
+      {b:'Jual semua saham',s:'Rugi dikunci. Tidur nyenyak, mesin berhenti.',f:()=>{S.cash+=S.a.saham;S.a.saham=0;S.beh.crashSell++;}}]},
+ {id:'bull',w:4,tag:'Pasar',cls:'good',t:'Pasar lagi naik kencang',p:'Saham +25%, reksadana +12%. Semua orang tiba-tiba jadi ahli saham.',pre:()=>{S.a.saham*=1.25;S.a.reksa*=1.12;},cond:()=>S.a.saham+S.a.reksa>5*JT,
+  ch:[{b:'Amankan separuh untung',s:'Jual 50% saham jadi cash.',f:()=>{S.cash+=S.a.saham*.5;S.a.saham*=.5;}},{b:'Biarkan tumbuh',s:'',f:()=>{}}]},
+ {id:'stok',w:6,tag:'Peluang',t:'Supplier nawarin stok',p:'Modal {X}. Untung 40% kalau laku. Peluang laku habis dalam 3 bulan: 70%. Kalau tidak laku, sisanya jadi barang nyangkut.',
+  cond:()=>S.cash>=20*JT,X:()=>Math.min(100*JT,Math.max(20*JT,Math.floor(S.cash*.5/(10*JT))*10*JT)),
+  ch:[{b:'Ambil',s:'Uangnya keluar sekarang. Hasilnya langsung terungkap.',f:(X)=>{S.cash-=X;if(Math.random()<.7){S.cash+=X*1.4;pushLog('Laku habis','Stok '+rp(X)+' habis. Untung '+rp(X*.4)+'.');toast('Laku habis! +'+rp(X*.4));}else{S.a.bisnis+=X*.6;pushLog('Nyangkut','Cuma sebagian laku. '+rp(X*.6)+' jadi stok yang nganggur.');toast('Stok nyangkut. '+rp(X*.6)+' terkunci.');}}},{b:'Lewat',s:'',f:()=>{}}]},
+ {id:'mobil',w:4,tag:'Gaya hidup',t:'Pengin ganti mobil?',p:'Harga {X}. Hidup lebih nyaman (+20). Tapi pengeluaran naik {E}/bln selamanya: cicilan, bensin, servis, pajak.',
+  X:()=>Math.max(150*JT,Math.round(S.exp*15/(10*JT))*10*JT),E:()=>Math.round(S.exp*.18),
+  ch:[{b:'Beli tunai',s:'',f:(X,E)=>{S.cash-=X;S.exp+=E;S.life=clamp(S.life+20,0,100);S.beh.lifestyle++;},ok:(X)=>S.cash>=X},
+      {b:'Kredit',s:'Utang bertambah, bunga 14%/thn.',f:(X,E)=>{S.debt+=X;S.exp+=E;S.life=clamp(S.life+20,0,100);S.beh.lifestyle++;}},
+      {b:'Nanti dulu',s:'Yang lama masih jalan.',f:()=>{}}]},
+ {id:'medis',w:5,tag:'Keluarga',cls:'bad',t:'Orang rumah masuk rumah sakit',p:'Butuh {X} sekarang. Tidak bisa ditunda, tidak bisa ditolak.',X:()=>Math.round(S.exp*2.5/JT)*JT,
+  ch:[{b:'Bayar dari cash',s:'',f:(X)=>{S.cash-=X;},ok:(X)=>S.cash>=X},{b:'Cairkan tabungan',s:'',f:(X)=>{S.a.tabung-=X;},ok:(X)=>S.a.tabung>=X},{b:'Ngutang',s:'Bunga 14%/thn. Stres (−10).',f:(X)=>{S.debt+=X;S.life=clamp(S.life-10,0,100);}}]},
+ {id:'kos',w:4,tag:'Peluang',t:'Ada kos-kosan dijual',p:'Harga {X}. Sewa masuk ≈0,5%/bln + harga naik pelan. Bisa KPR: DP 20%, sisanya utang 14%/thn.',
+  cond:()=>nw()>50*JT,X:()=>Math.max(200*JT,Math.round(nw()*.8/(50*JT))*50*JT),
+  ch:[{b:'Beli tunai',s:'',f:(X)=>{S.cash-=X;S.a.properti+=X;},ok:(X)=>S.cash>=X},{b:'KPR (DP 20%)',s:'Cicilan otomatis masuk pengeluaran cicilan.',f:(X)=>{S.cash-=X*.2;S.debt+=X*.8;S.a.properti+=X;},ok:(X)=>S.cash>=X*.2},{b:'Lewat',s:'',f:()=>{}}]},
+ {id:'promo',w:4,tag:'Kerja',cls:'good',t:'Ditawari naik jabatan',p:'Gaji +20%. Jam kerja +10/minggu. "Ini investasi karier," kata bos.',cond:()=>!S.quit&&U.job==='karyawan',
+  ch:[{b:'Terima',s:'',f:()=>{S.inc*=1.2;S.jobHours+=10;}},{b:'Tolak',s:'Waktumu untuk bangun mesin sendiri.',f:()=>{S.life+=2;}}]},
+ {id:'gig',w:6,tag:'Peluang',t:'Ada proyek sampingan',p:'Bayarannya {X}/bln selama 3 bulan. Makan +15 jam/minggu.',X:()=>Math.round(Math.max(2*JT,S.exp*.6)/JT)*JT,
+  ch:[{b:'Ambil',s:'Capek sedikit (−5), uang tambah.',f:(X)=>{S.tempIncome=X;S.tempMonths=3;S.life=clamp(S.life-5,0,100);}},{b:'Lewat',s:'',f:()=>{}}]},
+ {id:'kerja',w:8,tag:'Peluang',cls:'good',t:'Ada lowongan',p:'Gaji {X}/bln, 45 jam/minggu. Ini bisa jadi bahan bakar pertama mesinmu.',cond:()=>S.quit&&S.inc<=S.exp,X:()=>Math.round(Math.max(3*JT,S.exp*1.4)/JT)*JT,
+  ch:[{b:'Ambil',s:'',f:(X)=>{S.inc=X;S.quit=false;S.jobHours=45;}},{b:'Tolak',s:'',f:()=>{}}]},
+ {id:'macet',w:4,tag:'Bisnis',cls:'bad',t:'Stok nggak gerak',p:'30% barangmu tidak laku 2 bulan. Nilai bisnis sudah dipotong 30%.',pre:()=>{S.a.bisnis*=.7;},cond:()=>S.a.bisnis>10*JT,
+  ch:[{b:'Obral cepat',s:'Jual 50% stok di harga 60%. Uang berputar lagi.',f:()=>{const v=S.a.bisnis*.5;S.a.bisnis-=v;S.cash+=v*.6;}},{b:'Tahan',s:'Tunggu laku sendiri. Uang tetap terkunci.',f:()=>{}}]},
+ {id:'startup',w:3,tag:'Peluang',t:'Teman ngajak patungan startup',p:'Minimal {X}. Hasilnya baru ketahuan 2 tahun lagi: 60% hilang, 30% jadi 2×, 10% jadi 10×.',cond:()=>S.cash>=20*JT,X:()=>Math.round(Math.max(10*JT,S.cash*.3)/(5*JT))*5*JT,
+  ch:[{b:'Ikut',s:'',f:(X)=>{S.cash-=X;S.startups.push({amt:X,m:S.month});}},{b:'Tolak',s:'',f:()=>{}}]},
+ {id:'inflasi',w:3,tag:'Ekonomi',cls:'bad',t:'Harga-harga naik',p:'Belanja bulanan tiba-tiba +8%. Gaji tidak ikut naik.',pre:()=>{S.exp*=1.08;},ch:[{b:'Lanjut',s:'',f:()=>{}}]},
+ {id:'thr',w:4,tag:'Bonus',cls:'good',t:'THR cair',p:'Satu bulan gaji masuk rekening.',cond:()=>!S.quit,pre:()=>{S.cash+=S.inc;},
+  ch:[{b:'Simpan untuk diinvestasikan',s:'',f:()=>{}},{b:'Liburan keluarga',s:'Habiskan separuh. Hidup +10.',f:()=>{S.cash-=S.inc*.5;S.life=clamp(S.life+10,0,100);S.beh.lifestyle++;}}]},
+ {id:'hp',w:4,tag:'Godaan',t:'HP baru keluar',p:'Harga {X}. Teman-teman sudah punya. Hidup +3.',X:()=>Math.round(Math.max(3*JT,S.exp*.5)/JT)*JT,ch:[{b:'Beli',s:'',f:(X)=>{S.cash-=X;S.life=clamp(S.life+3,0,100);S.beh.lifestyle++;},ok:(X)=>S.cash>=X},{b:'Skip',s:'',f:()=>{}}]},
+ {id:'kosong',w:3,tag:'Properti',cls:'bad',t:'Penghuni kos pindah',p:'Kosong 3 bulan. Sewa hilang, biaya perawatan tetap jalan.',cond:()=>S.a.properti>0,pre:()=>{S.cash-=S.a.properti*.02;},ch:[{b:'Lanjut',s:'',f:()=>{}}]},
+ {id:'burnout',w:6,tag:'Kesehatan',cls:'bad',t:'Tumbang',p:'Kamu kerja lebih dari 70 jam/minggu berbulan-bulan. Badan menagih. Hidup −15.',cond:()=>hours()>70,pre:()=>{S.life=clamp(S.life-15,0,100);},
+  ch:[{b:'Gaji orang buat pegang bisnis',s:'Waktumu kembali. Untung bisnis turun 1,2%/bln.',f:()=>{S.manager=true;},ok:()=>!S.manager&&S.a.bisnis>0},{b:'Lanjut saja',s:'',f:()=>{}}]},
+ {id:'resesi',w:3,tag:'Ekonomi',cls:'bad',t:'Ekonomi lesu',p:'Orang mengurangi belanja. Bisnis −15%, saham −15%.',cond:()=>S.a.bisnis+S.a.saham>10*JT,pre:()=>{S.a.bisnis*=.85;S.a.saham*=.85;},ch:[{b:'Lanjut',s:'',f:()=>{}}]},
+];
+function pickEvent(){if(S.month<2)return null;if(Math.random()>0.33)return null;const pool=EV.filter(e=>!e.cond||e.cond());const tot=pool.reduce((x,e)=>x+e.w,0);let r=Math.random()*tot;for(const e of pool){r-=e.w;if(r<=0)return e;}return pool[pool.length-1];}
+function showEvent(ev){
+  const X=ev.X?ev.X():0,E=ev.E?ev.E():0;
+  if(ev.pre)ev.pre();save();render();
+  const p=ev.p.replace('{X}',rp(X)).replace('{E}',rp(E));
+  const ch=ev.ch.map((c,i)=>`<button class="choice" data-i="${i}" ${c.ok&&!c.ok(X,E)?'disabled':''}><b>${c.b}</b>${c.s?`<span>${c.s}</span>`:''}</button>`).join('');
+  modal(`<div class="tag ${ev.cls||''}">${ev.tag} · umur ${age()}, bulan ${S.month}</div><h2>${ev.t}</h2><p>${p}</p>${ch}`);
+  $('#modal').querySelectorAll('.choice').forEach(b=>b.onclick=()=>{const c=ev.ch[+b.dataset.i];c.f(X,E);S.beh.events++;track('event_choice',{ev:ev.id,choice:c.b,month:S.month,nw:nw()});pushLog(ev.t,'Kamu pilih: <b>'+c.b+'</b>.');closeModal();if(S.cash<0)emergency();checkBadges();save();render();});
+}
+function yearEnd(ev){
+  const y=S.month/12,prev=S.hist[S.month-12]||S.hist[0],cur=nw(),g=prev>0?(cur-prev)/prev:0,f=freedom(),h=hours();
+  let coach;
+  if(cur<prev)coach='Kekayaanmu turun tahun ini. Biasanya karena dua hal: gaya hidup makan sisa uang, atau terlalu banyak di aset yang anjlok.';
+  else if(S.cash>S.exp*6)coach='Cash kamu nganggur lebih dari 6 bulan pengeluaran. Tiap bulan diam = kesempatan hilang. Tekan "Investasikan sekarang".';
+  else if(f>=1&&!S.quit)coach='Asetmu sudah bayar seluruh hidupmu. Kamu masih kerja karena butuh—atau karena kebiasaan?';
+  else if(h>65)coach=h+' jam/minggu. Kamu bangun kekayaan dengan menjual satu-satunya barang yang tidak bisa dibeli lagi.';
+  else if(g>.25)coach='Naik '+pct(g)+' setahun. Bagus. Tapi tanyakan: kalau tahun depan −35%, kamu masih bertahan?';
+  else coach='Konsisten. Bunga berbunga terasa membosankan—sampai tiba-tiba tidak.';
+  modal(`<div class="tag">Umur ${age()} · rekap tahun ke-${y}</div><h2>${rp(cur)}</h2><p class="eff">${g>=0?'+':''}${pct(g)} dari tahun lalu · aset bayar ${pct(Math.min(f,1))} hidupmu · ${h} jam kerja/minggu · risiko ${riskOfRuin()}%</p><p>${coach}</p><button class="primary" id="ok">Lanjut</button>`);
+  track('year_end',{y,nw:cur,freedom:f,hours:h,alloc:S.alloc});
+  $('#ok').onclick=()=>{closeModal();if(ev)showEvent(ev);};
+}
+
+/* ============ UI ============ */
+function modal(html){let o=$('#modal');if(!o){o=document.createElement('div');o.id='modal';o.className='overlay';document.body.appendChild(o);}o.innerHTML=`<div class="modal pop" role="dialog" aria-modal="true">${html}</div>`;}
+function closeModal(){const o=$('#modal');if(o)o.remove();}
+let toastT;function toast(m,badge){const t=$('#toast');t.textContent=m;t.className=badge?'badge-t':'';t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',badge?3000:2200);}
+function animateNW(a,b){const el=$('#nw');if(!el||a===b)return;const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/500);el.textContent=rp(a+(b-a)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+
+function coachLine(){
+  const f=freedom(),sp=surplus(),h=hours();
+  if(S.month===0)return 'Ini strategimu: tiap bulan, <b>sisa uang</b> otomatis dibagi ke aset sesuai persentase di bawah. Atur dulu, lalu tekan <b>Jalankan 1 bulan</b>. Tekan <b>?</b> kalau ada istilah yang asing.';
+  if(sp<=0)return '<b>Sisa uangmu minus.</b> Sebelum bicara investasi, balapan pertama adalah: uang masuk harus lebih besar dari uang keluar. Cari tawaran kerja/proyek di kartu yang muncul.';
+  if(S.month<4&&S.cash+S.a.tabung<S.exp*3)return 'Prioritas pertama: <b>dana darurat</b> 3 bulan pengeluaran ('+rp(S.exp*3)+') di tabungan. Tanpa ini, satu musibah langsung jadi utang.';
+  if(S.cash>S.exp*6)return 'Ada '+rp(S.cash)+' cash nganggur. Uang diam tidak berbunga-berbunga. Tekan <b>Investasikan sekarang</b>.';
+  if(S.debt>0&&S.debt*LOAN>passive())return 'Bunga utangmu ('+rp(S.debt*LOAN)+'/bln) lebih besar dari uang masuk asetmu. Melunasi utang 14% = investasi 14% tanpa risiko.';
+  if(f>=1&&!S.quit)return '<b>Asetmu sudah bayar 100% hidupmu.</b> Kerja sekarang pilihan, bukan kewajiban.';
+  if(h>65)return h+' jam/minggu. Pertimbangkan gaji orang buat pegang bisnis.';
+  if(f>=.5)return 'Setengah hidupmu sudah dibayar aset. Tahan konsistensi — bagian tercepat kurva ada di depan.';
+  return 'Aset bayar '+pct(f)+' hidupmu. Di kecepatan ini, bebas di umur ±'+etaAge()+'. Setiap bulan yang konsisten memotong angka itu.';
+}
+function etaAge(){const f=freedom();if(f>=1)return age();const g=S.hist.length>12?(nw()/Math.max(S.hist[S.hist.length-13],1)):1.1;if(g<=1.001||nw()<=0)return '—';const need=freedomNumber(S.exp);const yrs=Math.log(need/Math.max(nw(),1))/Math.log(g);return yrs>60?'>'+(age()+60):Math.round(age()+yrs);}
+
+function render(){
+  if(!S)return renderStart();
+  if(S.over)return renderEnd();
+  const cur=nw(),f=freedom(),h=hours(),ror=riskOfRuin(),sp=surplus(),opp=cur-S.baseline,FN=freedomNumber(S.exp);
+  const mk=S.lastMkt?SLIDERS.concat('properti').filter(k=>S.a[k]>0).map(k=>`<span class="${S.lastMkt[k]>=0?'up':'down'}">${ASSETS[k].n.split(' ')[0]} ${S.lastMkt[k]>=0?'+':''}${pct(S.lastMkt[k])}</span>`).join(''):'';
+  $('#app').innerHTML=`
+  <div class="top"><div class="age">Umur ${age()}<small>${U.name} · bulan ${S.month}/${TURNS}</small></div><div class="muted" style="font-size:.8rem">🏁 ${S.streak} bln naik</div></div>
+  <div class="track"><i style="width:${S.month/TURNS*100}%"></i></div>
+
+  <div class="goal"><div class="lbl"><span>Berapa persen hidupmu dibayar aset ${q('pasif')}</span><span>${rp(passive())} / ${rp(S.exp)} per bln</span></div>
+    <div class="bar"><i style="width:${Math.min(f,1)*100}%"></i><span>${f>=1?'MERDEKA — 100%':pct(f)}</span></div></div>
+
+  <section class="hero"><div class="muted" style="font-size:.85rem">Total kekayaan ${q('kekayaan')} · Angka Bebas ${rp(FN)} ${q('bebas')}</div>
+    <div class="nw" id="nw">${rp(cur)}</div>
+    <div class="sub muted">Dibanding cuma nabung: <b class="${opp>=0?'up':'down'}">${opp>=0?'+':''}${rp(opp)}</b> ${q('compound')}</div>
+    <canvas id="chart" width="600" height="170"></canvas>
+    <div class="legend"><span><i style="background:var(--amber)"></i>Kekayaanmu</span><span><i style="background:var(--line)"></i>Kalau cuma ditabung</span><span><i style="background:var(--flag)"></i>Angka Bebas</span></div>
+    <div class="market">${mk}</div></section>
+
+  <div class="coach">${coachLine()}</div>
+
+  <div class="board">
+    <div><div class="k">Sisa uang/bln ${q('surplus')}</div><div class="v ${sp>=0?'up':'down'}">${sp>=0?'+':''}${rp(sp)}</div></div>
+    <div><div class="k">Jam kerja/minggu</div><div class="v ${h>65?'down':h<=20?'up':''}">${h}</div></div>
+    <div><div class="k">Risiko bangkrut ${q('risiko')}</div><div class="v ${ror>=40?'down':ror<15?'up':''}">${ror}%</div></div>
+  </div>
+
+  <div class="flow"><table>
+    <tr><td>Gaji / penghasilan${S.tempMonths>0?' <span class="muted">(+proyek '+S.tempMonths+' bln)</span>':''}</td><td>${rp(activeIncome())}</td></tr>
+    <tr><td>Uang masuk dari aset</td><td class="up">+${rp(passive())}</td></tr>
+    <tr><td>Pengeluaran hidup</td><td class="down">−${rp(S.exp)}</td></tr>
+    <tr><td>Cicilan utang <span class="muted">(sisa ${rp(S.debt)})</span></td><td class="down">${S.debt>0?'−'+rp(debtPay()):'—'}</td></tr>
+    <tr class="total"><td>Sisa uang bulan depan</td><td class="${sp>=0?'up':'down'}">${sp>=0?'+':''}${rp(sp)}</td></tr></table></div>
+
+  <div class="acts"><button class="primary" onclick="nextMonth(1)">Jalankan 1 bulan</button><button class="primary" style="background:var(--panel-2);color:var(--bone);border:1px solid var(--line)" onclick="nextMonth(12)">Jalankan 12 bulan</button></div>
+
+  <section class="strat"><h2>Strategi: ke mana sisa uang tiap bulan? <span>${allocTotal()}% dialokasikan${allocTotal()<100?', '+(100-allocTotal())+'% tetap cash':''}</span></h2>
+    <div class="presets">${Object.keys(PRESETS).map(p=>`<button class="${S.preset===p?'on':''}" onclick="setPreset('${p}')">${{aman:'Aman',seimbang:'Seimbang',berani:'Berani',bisnis:'Bisnis dulu'}[p]}</button>`).join('')}</div>
+    ${SLIDERS.map(k=>arow(k)).join('')}
+    ${S.a.properti>0?`<div class="arow hot"><div><div class="n">${ASSETS.properti.n}</div><div class="v">${rp(S.a.properti)} · sewa masuk ${rp(S.a.properti*yieldOf('properti'))}/bln</div></div><div class="step"><button onclick="sell('properti',1)" title="Jual">Jual</button></div></div>`:''}
+    <div class="cashrow"><span>Cash nganggur: <b>${rp(S.cash)}</b></span><button onclick="investCash()" ${S.cash<=0?'disabled':''}>Investasikan sekarang</button></div>
+    ${S.debt>0?`<div class="arow"><div><div class="n">Lunasi utang</div><div class="d">Bunga 14%/thn. Melunasi = untung 14% pasti.</div></div><div class="step"><button onclick="payDebt('all')" ${S.cash<=0?'disabled':''} style="width:auto;padding:0 10px;font-size:.85rem">Bayar semaksimal</button></div></div>`:''}
+  </section>
+
+  <section class="flow" style="margin-top:8px">
+    ${!S.quit&&S.inc>0?`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)"><div><b>Berhenti kerja</b><div class="muted" style="font-size:.8rem">${f>=1?'Asetmu sudah cukup. Kamu bisa.':'Aset baru bayar '+pct(f)+' hidupmu. Berhenti sekarang = makan tabungan.'}</div></div><button class="chip" onclick="confirmQuit()">Berhenti</button></div>`:''}
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0"><div><b>Gaji orang buat pegang bisnis</b><div class="muted" style="font-size:.8rem">Jam bisnis 10 → 2 per Rp100 jt. Untung turun 1,2%/bln.</div></div><button class="chip" onclick="toggleManager()" ${S.a.bisnis<=0&&!S.manager?'disabled':''}>${S.manager?'Lepas':'Rekrut'}</button></div>
+  </section>
+
+  <div class="badges">${BADGES.map(b=>`<span class="badge ${S.badges.includes(b.id)?'got':''}">${S.badges.includes(b.id)?'✓ ':''}${b.n}</span>`).join('')}</div>
+  <button class="ghost" onclick="confirmReset()">Mulai ulang</button>
+  <div class="log">${S.log.map(l=>`<div><b>Bln ${l.m} · ${l.t}</b> — ${l.text}</div>`).join('')}</div>`;
+  drawChart();
+}
+function arow(k){const A=ASSETS[k],v=S.a[k],y=yieldOf(k);
+  return `<div class="arow ${v>0?'hot':''}"><div><div class="n">${A.n}</div><div class="d">${A.d}</div>${v>0?`<div class="v">Punya <b>${rp(v)}</b>${y>0?' · masuk '+rp(v*y)+'/bln':''} · <button class="q" style="width:auto;padding:0 8px;border-radius:999px" onclick="sell('${k}',.5)">jual ½</button></div>`:''}</div>
+  <div class="step"><button onclick="bump('${k}',-10)" ${S.alloc[k]<=0?'disabled':''}>−</button><b>${S.alloc[k]}%</b><button onclick="bump('${k}',10)" ${allocTotal()>=100?'disabled':''}>+</button></div></div>`;}
+function confirmQuit(){modal(`<div class="tag">Keputusan besar</div><h2>Berhenti kerja sekarang?</h2><p>Gaji ${rp(S.inc)}/bln hilang. Uang masuk dari aset ${rp(passive())}/bln, pengeluaran ${rp(S.exp)}/bln. ${freedom()<1?'<b>Sisa uangmu akan minus.</b>':'Sisa uang tetap positif.'}</p><button class="choice" onclick="quitJob();closeModal()"><b>Ya, berhenti</b></button><button class="choice" onclick="closeModal()"><b>Belum</b></button>`);}
+function confirmReset(){modal(`<div class="tag bad">Mulai ulang</div><h2>Hapus permainan ini?</h2><p>Di dunia nyata waktu tidak bisa diulang. Di sini boleh.</p><button class="choice" onclick="track('reset',{month:S.month});store.del('cr-save');S=null;U=null;closeModal();render()"><b>Ya, mulai ulang</b></button><button class="choice" onclick="closeModal()"><b>Lanjut main</b></button>`);}
+
+function drawChart(){const c=$('#chart');if(!c)return;const ctx=c.getContext('2d'),W=600,H=170,dpr=window.devicePixelRatio||1;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.height=H+'px';
+  const hist=S.hist,base=S.base,n=TURNS+1,FN=freedomNumber(S.exp);const all=hist.concat(base);let lo=Math.min(0,...all),hi=Math.max(...all,Math.min(FN,Math.max(...all)*3),10*JT)*1.1;
+  const X=i=>14+i/(n-1)*(W-26),Y=v=>H-16-(v-lo)/(hi-lo)*(H-28);ctx.clearRect(0,0,W,H);ctx.font='11px Manrope,sans-serif';
+  if(FN<hi){ctx.strokeStyle='#58B368';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(14,Y(FN));ctx.lineTo(W-12,Y(FN));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#58B368';ctx.textAlign='left';ctx.fillText('Angka Bebas '+rp(FN),16,Y(FN)-4);}
+  for(const m of[100*JT,500*JT,M,5*M,10*M]){if(m>lo&&m<hi&&Math.abs(m-FN)/hi>.06){ctx.strokeStyle='#3B4F5B';ctx.setLineDash([2,6]);ctx.beginPath();ctx.moveTo(14,Y(m));ctx.lineTo(W-12,Y(m));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#A9B0AF';ctx.textAlign='right';ctx.fillText(rp(m),W-14,Y(m)-3);}}
+  if(lo<0){ctx.strokeStyle='#E4572E';ctx.beginPath();ctx.moveTo(14,Y(0));ctx.lineTo(W-12,Y(0));ctx.stroke();}
+  ctx.strokeStyle='#4A606D';ctx.lineWidth=2;ctx.beginPath();base.forEach((v,i)=>i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v)));ctx.stroke();
+  ctx.strokeStyle='#F5B841';ctx.lineWidth=3;ctx.lineJoin='round';ctx.beginPath();hist.forEach((v,i)=>i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v)));ctx.stroke();
+  const li=hist.length-1;ctx.fillStyle='#F5B841';ctx.beginPath();ctx.arc(X(li),Y(hist[li]),4,0,7);ctx.fill();
+  ctx.fillStyle='#A9B0AF';ctx.textAlign='center';for(let y=0;y<=10;y+=2){ctx.textAlign=y===0?'left':y===10?'right':'center';ctx.fillText('umur '+(U.age+y),X(y*12),H-3);}}
+
+/* ============ onboarding ============ */
+const OB=[
+ {k:'name',ask:'Halo! Aku bakal nemenin kamu main 10 tahun ke depan dalam 10 menit. Panggil kamu siapa?',type:'text',ph:'Nama panggilan'},
+ {k:'age',ask:'Umur kamu sekarang?',type:'num',ph:'contoh: 27',chips:['22','27','32','38','45']},
+ {k:'job',ask:'Uang kamu datang dari mana sekarang?',type:'pick',opts:[['karyawan','Gaji bulanan'],['freelance','Freelance / tidak tetap'],['usaha','Usaha sendiri'],['none','Belum ada penghasilan']]},
+ {k:'income',ask:(u)=>u.job==='none'?'Oke, kita mulai dari nol. Ada uang saku/kiriman per bulan? Kalau tidak ada, isi 0.':'Kira-kira berapa uang masuk per bulan? Jujur saja, ini cuma di HP kamu.',type:'rp',ph:'contoh: 4,5 jt',chips:['2 jt','4 jt','7 jt','12 jt','25 jt']},
+ {k:'exp',ask:'Berapa habis per bulan? Makan, kos/rumah, transport, jajan—semua.',type:'rp',ph:'contoh: 3,8 jt',chips:['2 jt','3,5 jt','6 jt','10 jt','20 jt']},
+ {k:'savings',ask:'Tabungan yang ada sekarang (rekening, cash, emas, reksadana), totalnya?',type:'rp',ph:'contoh: 8 jt',chips:['0','5 jt','20 jt','50 jt','150 jt']},
+ {k:'debt',ask:'Ada cicilan/utang? Total sisanya berapa? (paylater, motor, KTA). Isi 0 kalau tidak ada.',type:'rp',ph:'contoh: 12 jt',chips:['0','5 jt','15 jt','50 jt','200 jt']},
+];
+let obi=0,obLog=[];
+function renderStart(){
+  const saved=store.get('cr-save');
+  if(new URLSearchParams(location.search).get('admin')===CONFIG.adminKey)return renderAdmin();
+  if(!U)U={};
+  const step=OB[obi];
+  let html=`<div class="chat">
+  <h1 style="font-size:1.9rem;margin:10px 0 2px">Compound Race</h1><div class="amber" style="font-weight:700;margin-bottom:6px">Kapan uangmu bisa membayar hidupmu?</div>
+  ${saved&&saved.S&&!saved.S.over&&obi===0?`<button class="primary" onclick="U=store.get('cr-save').U;S=store.get('cr-save').S;render()">Lanjutkan · ${saved.U.name}, umur ${saved.U.age+Math.floor(saved.S.month/12)}</button><div class="muted" style="font-size:.85rem;text-align:center">atau mulai baru di bawah</div>`:''}
+  ${obLog.map(l=>`<div class="bub me">${l.q}</div><div class="bub you">${l.a}</div>`).join('')}`;
+  if(step){const ask=typeof step.ask==='function'?step.ask(U):step.ask;
+    html+=`<div class="bub me pop">${ask}</div>`;
+    if(step.type==='pick')html+=`<div class="chips">${step.opts.map(o=>`<button class="chip" onclick="obAnswer('${o[0]}','${o[1]}')">${o[1]}</button>`).join('')}</div>`;
+    else{if(step.chips)html+=`<div class="chips">${step.chips.map(c=>`<button class="chip" onclick="obAnswer('${c}','${c}')">${c}</button>`).join('')}</div>`;
+      html+=`<div class="inp"><input id="obin" type="${step.type==='num'?'number':'text'}" inputmode="${step.type==='text'?'text':'decimal'}" placeholder="${step.ph}" autocomplete="off"><button onclick="obSubmit()">OK</button></div>`;}
+  }else html+=revealHTML();
+  html+=`</div>`;
+  $('#app').innerHTML=html;const inp=$('#obin');if(inp){inp.focus();inp.onkeydown=e=>{if(e.key==='Enter')obSubmit();};}
+  window.scrollTo(0,document.body.scrollHeight);
+}
+function obSubmit(){const v=$('#obin').value.trim();if(!v)return;obAnswer(v,v);}
+function obAnswer(v,label){const step=OB[obi];let val=v;
+  if(step.type==='num'){val=parseInt(v);if(isNaN(val)||val<10||val>90)return toast('Isi umur antara 10–90.');}
+  if(step.type==='rp'){val=parseRp(v);if(val===null)return toast('Tulis angka, contoh: 4,5 jt');if(step.k==='exp'&&val<=0)return toast('Pengeluaran tidak bisa 0.');label=rp(val);}
+  if(step.type==='text'){val=v.slice(0,20).replace(/[<>]/g,'');label=val;}
+  U[step.k]=val;obLog.push({q:typeof step.ask==='function'?step.ask(U):step.ask,a:label});obi++;
+  if(obi>=OB.length)track('onboarding_done',{profile:U});
+  renderStart();}
+function revealHTML(){
+  const sp=U.income-U.exp-Math.max(U.debt*LOAN,U.debt*.02),FN=freedomNumber(U.exp),nw0=U.savings-U.debt;
+  const naive=nw0+sp*120,ageFree=sp>0?Math.round(U.age+(FN-Math.max(nw0,0))/(sp*12)):null;
+  let hook;
+  if(sp<=0)hook=`Sisa uangmu tiap bulan <b class="down">${rp(sp)}</b>. Artinya sekarang kamu bukan sedang menabung—kamu sedang makan tabungan. Balapan pertama kamu jelas: bikin uang masuk lebih besar dari uang keluar. Game ini akan bantu lihat caranya.`;
+  else hook=`Sisa uangmu <b class="up">${rp(sp)}/bln</b>. Kalau cuma ditabung, dalam 10 tahun kamu punya <b>${rp(naive)}</b> — dan baru bebas di umur <b>${ageFree>120?'tidak akan':ageFree}</b>. Bunga berbunga bisa memotong itu jauh. Tapi hanya kalau kamu bertahan.`;
+  return `<div class="reveal pop"><div class="muted">Angka Bebas kamu ${q('bebas')}</div><div class="big">${rp(FN)}</div><div class="muted" style="font-size:.85rem">= aset yang uang masuknya cukup buat bayar ${rp(U.exp)}/bln selamanya</div><p>${hook}</p></div>
+  <label class="consent"><input type="checkbox" id="consent" checked> Jawabanku disimpan untuk personalisasi game dan agar ${CONFIG.brand} bisa memberi saran yang cocok dengan kondisiku. Tidak dijual ke pihak lain.</label>
+  <button class="primary" onclick="U.consent=$('#consent').checked;startGame()">Mulai balapan: 10 tahun, 120 keputusan</button>
+  <button class="ghost" onclick="obi=0;obLog=[];U={};renderStart()">Isi ulang</button>`;
+}
+
+/* ============ end ============ */
+function riskProfile(){const a=S.alloc,agg=a.saham+a.bisnis,cons=a.tabung+a.emas;let p;
+  if(agg>=50)p='Agresif';else if(cons>=60||agg<20)p='Konservatif';else p='Moderat';
+  const notes=[];if(S.beh.crashSell)notes.push('cenderung panik saat pasar jatuh');if(S.beh.crashBuy)notes.push('berani beli saat orang lain takut');if(S.beh.lifestyle>=3)notes.push('gaya hidup sering menang lawan investasi');if(S.beh.debtPay>=3)notes.push('disiplin melunasi utang');if(S.a.bisnis>0)notes.push('nyaman dengan bisnis nyata');
+  return {p,notes};}
+function endStats(){const rp_=riskProfile();return {nw:nw(),freedom:freedom(),hours:hours(),ror:riskOfRuin(),life:S.life,debt:S.debt,alloc:S.alloc,profile:rp_.p,notes:rp_.notes,freeMonth:S.freeMonth,badges:S.badges,beh:S.beh,ruin:S.ruin,u:{age:U.age,income:U.income,exp:U.exp,savings:U.savings,debt:U.debt,job:U.job,consent:U.consent}};}
+function renderEnd(){
+  const cur=nw(),f=freedom(),h=hours(),ror=riskOfRuin(),start=S.hist[0],rpf=riskProfile(),opp=cur-S.baseline;
+  let v,cls='',why;
+  if(S.ruin){v='Bangkrut';cls='ruin';why='Utang melewati kemampuan aset dan penghasilanmu. Untung besar yang tidak bisa kamu tahan bukan untung.';}
+  else if(f>=1.5&&h<=25&&ror<25){v='Merdeka Finansial';cls='owner';why='Asetmu bayar '+f.toFixed(1)+'× hidupmu, kerja '+h+' jam/minggu, risiko kecil. Kamu punya mesin—dan mesinnya tidak butuh kamu.';}
+  else if(f>=1&&h<=45){v='Hampir Merdeka';why='Uang sudah cukup, tapi kamu masih menjual waktu. Satu langkah lagi: berhenti kerja atau gaji orang.';}
+  else if(ror>=40){v='Beruntung, Belum Kaya';why='Kekayaan '+rp(cur)+', risiko bangkrut '+ror+'%. Kamu sedang beruntung. Mesin yang bisa meledak sebesar ini bukan mesin.';}
+  else if(cur>Math.max(start,JT)*3&&h>55){v='Pekerja Keras';why='Kekayaan naik '+(cur/Math.max(start,JT)).toFixed(1)+'×, tapi '+h+' jam/minggu. Kamu membangun bisnis yang memiliki kamu.';}
+  else if(f>=.3||cur>=5*Math.max(start,S.exp*12)){v='Mesin Menyala';why='Aset bayar '+pct(f)+' hidupmu, kekayaan '+(cur/Math.max(start,JT)).toFixed(1)+'× dari awal. Mesinnya sudah jalan. Yang kurang tinggal waktu — bagian tercepat kurva ada setelah tahun ke-10.';}
+  else{v='Jalan di Tempat';why='Aset baru bayar '+pct(f)+' hidupmu setelah 10 tahun. Cek log: berapa lama cash diam, berapa kali gaya hidup menang?';}
+  $('#app').innerHTML=`<div class="end">
+  <div class="muted" style="margin-top:14px">${U.name} · umur ${age()} · ${S.month>=TURNS?'10 tahun kemudian':Math.floor(S.month/12)+' tahun '+(S.month%12)+' bulan kemudian'}</div>
+  <div class="verdict ${cls}">${v}</div><p style="line-height:1.5;max-width:52ch">${why}</p>
+  <canvas id="chart" width="600" height="170"></canvas>
+  <table class="endtable">
+  <tr><td>Total kekayaan</td><td>${rp(cur)}</td></tr><tr><td>Mulai dari</td><td>${rp(start)}</td></tr>
+  <tr><td>Selisih vs cuma nabung</td><td class="${opp>=0?'up':'down'}">${opp>=0?'+':''}${rp(opp)}</td></tr>
+  <tr><td>Uang masuk dari aset / bln</td><td>${rp(passive())}</td></tr><tr><td>Pengeluaran / bln</td><td>${rp(S.exp)}</td></tr>
+  <tr><td>Hidup dibayar aset</td><td>${pct(f)}</td></tr>${S.freeMonth?`<tr><td>Merdeka di umur</td><td>${U.age+Math.floor(S.freeMonth/12)}</td></tr>`:''}
+  <tr><td>Sisa utang</td><td>${rp(S.debt)}</td></tr><tr><td>Jam kerja / minggu</td><td>${h}</td></tr><tr><td>Risiko bangkrut</td><td>${ror}%</td></tr></table>
+  <div class="profile"><div class="t">Cara kamu mengambil keputusan uang</div><div class="p">${rpf.p}</div><p>${rpf.notes.length?'Dari '+S.month+' keputusanmu: '+rpf.notes.join(', ')+'.':'Kamu bermain aman dan konsisten.'} Ini bukan tes—ini cermin. Kondisi nyatamu (${rp(U.income)} masuk, ${rp(U.exp)} keluar) bisa dijalankan dengan cara yang sama.</p>
+    ${U.consent?leadHTML():''}</div>
+  <div class="lesson">Kamu tidak menang karena untung paling besar. Kamu menang karena membangun mesin yang bertahan cukup lama untuk berbunga-berbunga.</div>
+  <button class="primary" onclick="track('replay',{});store.del('cr-save');S=null;U=null;obi=0;obLog=[];render()">Main lagi</button>
+  <button class="ghost" onclick="shareResult('${v}')">Salin hasil</button></div>`;
+  drawChart();
+}
+function leadHTML(){return `<div style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px"><b>Mau versi nyatanya?</b><div class="muted" style="font-size:.85rem;margin:4px 0 8px">${CONFIG.brand} kirim rencana 12 bulan pertama sesuai angkamu. Gratis, lewat WhatsApp.</div>
+  <div class="inp"><input id="wa" type="tel" inputmode="tel" placeholder="08xx nomor WhatsApp"><button onclick="submitLead()">Kirim</button></div>
+  <label class="consent"><input type="checkbox" id="lc"> Saya setuju dihubungi ${CONFIG.brand} soal rencana ini. Bisa berhenti kapan saja.</label></div>`;}
+function submitLead(){const wa=$('#wa').value.replace(/\D/g,'');if(wa.length<9)return toast('Nomor WA belum lengkap.');if(!$('#lc').checked)return toast('Centang persetujuan dulu.');
+  track('lead',{wa,name:U.name,...endStats()});
+  if(CONFIG.waNumber){const msg=encodeURIComponent(`Halo ${CONFIG.brand}, saya ${U.name} (${age()}). Hasil Compound Race saya: aset bayar ${pct(freedom())} hidup, profil ${riskProfile().p}. Minta rencana 12 bulan.`);location.href=`https://wa.me/${CONFIG.waNumber}?text=${msg}`;}
+  else{$('#wa').parentElement.innerHTML='<div class="up" style="font-weight:700;padding:8px 0">Tersimpan. Kami hubungi kamu.</div>';}}
+function shareResult(v){const t=`Compound Race — ${v}\nUmur ${age()}: kekayaan ${rp(nw())}, aset bayar ${pct(freedom())} hidup, ${hours()} jam kerja/minggu.\nKapan uangmu bisa membayar hidupmu? Main di ${location.origin}`;if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('Hasil disalin.'));else toast(t);}
+
+/* ============ admin: ekspor data lokal ============ */
+function renderAdmin(){const ev=store.get('cr-events')||[];const leads=ev.filter(e=>e.type==='lead'),ends=ev.filter(e=>e.type==='game_end'),starts=ev.filter(e=>e.type==='game_start');
+  $('#app').innerHTML=`<h1 style="margin:20px 0 10px;font-size:1.5rem">Data lokal browser ini</h1><p class="muted" style="margin-bottom:12px">${starts.length} game dimulai · ${ends.length} selesai · ${leads.length} lead · ${ev.length} event. Untuk data semua pemain, isi CONFIG.endpoint.</p>
+  <button class="primary" onclick="const b=new Blob([JSON.stringify(${JSON.stringify(ev).replace(/</g,'\\u003c')})],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='compound-race-events.json';a.click()">Unduh JSON</button>
+  <button class="ghost" onclick="store.del('cr-events');location.reload()">Hapus data lokal</button><button class="ghost" onclick="location.href=location.pathname">Kembali ke game</button>`;}
+
+render();
+</script>
+</body>
+</html>
